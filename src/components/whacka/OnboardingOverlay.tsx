@@ -85,17 +85,27 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     {
       content: (
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[22px] font-bold text-slate-800">Have fun in</span>
-          <span
-            style={{
-              fontFamily: "'Pacifico', cursive",
-              fontSize: '28px',
-              color: '#F97316',
-              lineHeight: 1.3,
-            }}
-          >
-            Whacka
+          <span className="text-[22px] font-bold text-slate-800">
+            Have fun in{' '}
+            <span
+              style={{
+                fontFamily: "'Pacifico', cursive",
+                fontSize: '22px',
+                color: '#F97316',
+                fontWeight: 400,
+              }}
+            >
+              Whacka
+            </span>
           </span>
+          <button
+            onClick={(e) => { e.stopPropagation(); }}
+            className="mt-4 px-8 py-2.5 rounded-full text-white font-semibold text-[15px]"
+            style={{ backgroundColor: '#F97316' }}
+            data-dismiss="true"
+          >
+            Yes I will!
+          </button>
         </div>
       ),
       textPosition: 'center',
