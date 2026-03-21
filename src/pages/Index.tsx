@@ -43,6 +43,9 @@ const Index = () => {
   const [collectedApps, setCollectedApps] = useState<StudioApp[]>([]);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [showHomeGate, setShowHomeGate] = useState(false);
+  const [gateExpanded, setGateExpanded] = useState(false);
+  const [gateEmail, setGateEmail] = useState('');
+  const [gatePassword, setGatePassword] = useState('');
   const [panelType, setPanelType] = useState<'preview' | 'details'>('preview');
   const [subPage, setSubPage] = useState<SubPage>(null);
   const [followInitialTab, setFollowInitialTab] = useState<string>('Following');
