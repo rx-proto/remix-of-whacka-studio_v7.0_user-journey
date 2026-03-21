@@ -143,10 +143,11 @@ const Index = () => {
     navigate('/auth');
   };
 
-  // Slide direction: positive = enter from right, negative = enter from left
+  // Visual tab positions: Home(0)=0, Explore(1)=2, Build(2)=1
+  const TAB_POSITION: Record<number, number> = { 0: 0, 1: 2, 2: 1 };
   const slideDir = useRef(1);
   if (mainTab !== prevTab) {
-    slideDir.current = mainTab > prevTab ? 1 : -1;
+    slideDir.current = (TAB_POSITION[mainTab] ?? mainTab) > (TAB_POSITION[prevTab] ?? prevTab) ? 1 : -1;
   }
 
   const tabVariants = {
