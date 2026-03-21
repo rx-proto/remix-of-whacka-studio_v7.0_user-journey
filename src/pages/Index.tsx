@@ -31,7 +31,7 @@ const SUB_PAGE_TITLES: Record<string, string> = {
 };
 
 const Index = () => {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, login } = useAuth();
   const navigate = useNavigate();
   const [mainTab, setMainTab] = useState(1); // default to Explore tab
   const [prevTab, setPrevTab] = useState(1);
