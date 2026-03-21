@@ -6,7 +6,7 @@ const HeroCard: React.FC = () => {
       <div className="flex items-baseline gap-2">
         <span className="text-[20px] font-semibold text-slate-800 tracking-tight">Build Apps with</span>
         <span
-          style={{ fontFamily: "'Pacifico', cursive", fontSize: '22px', color: '#C95A3C' }}
+          style={{ fontFamily: "'Pacifico', cursive", fontSize: '22px', color: '#F97316' }}
         >
           Whacka
         </span>

@@ -146,9 +146,9 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ onOpenPlaylist, onO
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M7.61 6.3a3 3 0 0 0-3.92 1.3l-1.38 2.79a3 3 0 0 0 1.3 3.91l6.89 3.597a1 1 0 0 0 1.342-.447l3.106-6.211a1 1 0 0 0-.447-1.341z"/>
           <path d="M8 9V2"/>
-          <path d="M15.295 19.562 16 22" stroke="#C95A3C"/>
-          <path d="m17 16 3.758 2.098" stroke="#C95A3C"/>
-          <path d="m19 12.5 3.026-.598" stroke="#C95A3C"/>
+          <path d="M15.295 19.562 16 22" stroke="#F97316"/>
+          <path d="m17 16 3.758 2.098" stroke="#F97316"/>
+          <path d="m19 12.5 3.026-.598" stroke="#F97316"/>
         </svg>
         <h2 className="text-[22px] font-bold text-slate-900 tracking-tight">Playlists</h2>
       </div>
