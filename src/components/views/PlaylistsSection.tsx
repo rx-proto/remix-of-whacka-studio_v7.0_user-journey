@@ -134,7 +134,7 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ onOpenPlaylist, onO
             className={`flex-shrink-0 pb-2.5 text-[15px] font-bold transition-colors relative
               ${activeTag === i ? 'text-foreground' : 'text-muted-foreground'}`}
           >
-            {pl.name}
+            <span className="flex items-center gap-1.5">{PLAYLIST_ICONS[pl.name]}{pl.name}</span>
             {activeTag === i && (
               <motion.div
                 layoutId="playlist-underline"
