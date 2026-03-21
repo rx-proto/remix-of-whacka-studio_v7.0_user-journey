@@ -15,6 +15,7 @@ const StickyTopBar: React.FC<StickyTopBarProps> = ({
   onOpenMenu,
   onOpenNotifications,
   onOpenTip,
+  onTestOnboarding,
   showNotification = true,
   children,
   threshold = 20,
