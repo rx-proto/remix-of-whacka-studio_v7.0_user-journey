@@ -12,13 +12,7 @@ const IDEAS = [
   'Make a plant care reminder app',
   'Build a movie night picker',
   'Design a micro-journal app',
-  'Create a walk art tracker',
-  'Build language flashcards',
-  'Make a birthday countdown app',
   'Create a mood playlist generator',
-  'Build a travel bucket list',
-  'Design a daily sketch challenge',
-  'Make a gratitude jar app',
 ];
 
 interface BuildTabViewProps {
