@@ -636,7 +636,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.25 }}
-                      className="mx-4 mb-2 rounded-full px-4 py-3 flex items-center gap-3"
+                      className="mx-5 mb-2 rounded-full px-4 py-3 flex items-center gap-3"
                       style={{ background: '#1e293b' }}
                     >
                       
