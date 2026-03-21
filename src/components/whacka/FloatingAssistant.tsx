@@ -678,10 +678,11 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                   >
                     <Send size={16} />
                   </motion.button>
-                </div>
               </div>
               </>
             ) : (
+              <div className="flex-shrink-0 pb-[env(safe-area-inset-bottom,8px)]" />
+            )}
           </motion.div>
             </>
           )}
