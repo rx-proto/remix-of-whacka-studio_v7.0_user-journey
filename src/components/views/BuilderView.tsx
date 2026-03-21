@@ -24,6 +24,7 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
   const [buildPhase, setBuildPhase] = useState(0);
   const [isBuilding, setIsBuilding] = useState(true);
   const [showShare, setShowShare] = useState(false);
+  const [showTip, setShowTip] = useState(true);
 
   useEffect(() => {
     if (!isBuilding) return;
