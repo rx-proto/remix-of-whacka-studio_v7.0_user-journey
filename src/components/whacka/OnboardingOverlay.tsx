@@ -76,7 +76,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
           Whacka lets you add any app to your phone's home screen and use it <span style={{ color: '#F97316', fontWeight: 600 }}>like a native app</span>. You can always find the instructions here.
         </p>
       ),
-      spotlight: { cx: 310, cy: 38, r: 28 },
+      spotlight: { cx: 305, cy: 38, r: 28 },
       textPosition: 'below-top',
       showDots: true,
       dotIndex: 3,
