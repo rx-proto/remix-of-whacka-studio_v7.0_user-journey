@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 import { RefreshCw } from 'lucide-react';
 import StickyTopBar from '@/components/whacka/StickyTopBar';
 import PlaylistsSection from './PlaylistsSection';
