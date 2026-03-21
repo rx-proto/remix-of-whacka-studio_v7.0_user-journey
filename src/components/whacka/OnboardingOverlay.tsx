@@ -99,7 +99,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
             </span>
           </span>
           <button
-            onClick={(e) => { e.stopPropagation(); }}
+            onClick={() => {}}
             className="mt-4 px-8 py-2.5 rounded-full text-white font-semibold text-[15px]"
             style={{ backgroundColor: '#F97316' }}
             data-dismiss="true"
