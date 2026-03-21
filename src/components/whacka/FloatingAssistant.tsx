@@ -604,6 +604,28 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                 <DetailsPanelContent variant="social" />
               </motion.div>
             ) : activeTab === 'chat' ? (
+              <>
+                {/* Auto-save tip after first build — above input */}
+                <AnimatePresence>
+                  {showAutoSaveTip && !isBuilding && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.25 }}
+                      className="mx-4 mb-2 rounded-full px-4 py-3 flex items-center gap-3"
+                      style={{ background: '#1e293b' }}
+                    >
+                      <Share size={16} className="text-white/60 flex-shrink-0" />
+                      <p className="text-[12px] text-white/90 leading-snug flex-1">
+                        Your app is auto saved & published. Share or add to phone screen through <Share size={10} className="inline-block text-white/60 -mt-0.5" /> anytime!
+                      </p>
+                      <button onClick={() => setShowAutoSaveTip(false)} className="text-white/50 flex-shrink-0">
+                        <X size={14} />
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               <div className="flex-shrink-0 px-4 pb-[env(safe-area-inset-bottom,16px)] pt-2 border-t border-foreground/5">
                 {/* Building step carousel — one at a time */}
                 <AnimatePresence mode="wait">
@@ -618,32 +640,6 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                     >
                       <Loader2 size={12} className="animate-spin text-primary" />
                       <span className="text-muted-foreground">{thinkingSteps[buildPhase]}</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                {/* Auto-save tip after first build */}
-                <AnimatePresence>
-                  {showAutoSaveTip && !isBuilding && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.25 }}
-                      className="mb-2 rounded-xl px-3 py-2.5 flex items-start gap-2"
-                      style={{
-                        background: 'rgba(255,255,255,0.75)',
-                        border: '1px solid rgba(0,0,0,0.06)',
-                        boxShadow: '0 1px 8px rgba(0,0,0,0.05)',
-                      }}
-                    >
-                      <p className="text-[12px] text-slate-700 leading-snug flex-1">
-                        Your app is auto saved & published. Share or add to phone screen through{' '}
-                        <Share size={11} className="inline-block text-slate-500 -mt-0.5" />{' '}
-                        anytime!
-                      </p>
-                      <button onClick={() => setShowAutoSaveTip(false)} className="text-slate-400 flex-shrink-0 mt-0.5">
-                        <X size={13} />
-                      </button>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -684,12 +680,13 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                   </motion.button>
                 </div>
               </div>
+              </>
             ) : (
               <div className="flex-shrink-0 pb-[env(safe-area-inset-bottom,8px)]" />
             )}
             </>
           </motion.div>
-            </>
+          </>
           )}
         </AnimatePresence>,
         document.body
