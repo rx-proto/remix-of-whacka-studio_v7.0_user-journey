@@ -616,7 +616,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                       className="mx-4 mb-2 rounded-full px-4 py-3 flex items-center gap-3"
                       style={{ background: '#1e293b' }}
                     >
-                      <Share size={16} className="text-white/60 flex-shrink-0" />
+                      
                       <p className="text-[12px] text-white/90 leading-snug flex-1">
                         Your app is auto saved & published. Share or add to phone screen through <Share size={10} className="inline-block text-white/60 -mt-0.5" /> anytime!
                       </p>
