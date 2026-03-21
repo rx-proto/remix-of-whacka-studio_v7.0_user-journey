@@ -236,12 +236,12 @@ const Index = () => {
         }}
       />
 
-      {/* Home gate for unauthenticated users */}
+      {/* Home gate for unauthenticated users — sits above main content but below nav */}
       <AnimatePresence>
         {showHomeGate && (
           <motion.div
             key="home-gate"
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F9FAFB]"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#F9FAFB]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -251,19 +251,27 @@ const Index = () => {
               <div className="absolute top-1/4 left-1/3 w-48 h-48 rounded-full bg-amber-100/30 blur-3xl" />
               <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-orange-100/25 blur-3xl" />
             </div>
-            <motion.button
-              onClick={() => setShowHomeGate(false)}
-              className="absolute top-14 left-4 w-10 h-10 rounded-full flex items-center justify-center min-h-[44px] min-w-[44px] text-slate-400 active:bg-slate-100"
-              whileTap={{ scale: 0.9 }}
-            >
-              <ArrowLeft size={20} />
-            </motion.button>
-            <div className="relative z-10 text-center px-8 space-y-5">
-              <div className="text-5xl">🏠</div>
-              <h2 className="text-xl font-bold text-slate-800">Sign in to unlock Home</h2>
-              <p className="text-sm text-slate-500 leading-relaxed max-w-[280px] mx-auto">
-                Save your apps, track your browsing history, and pick up right where you left off.
-              </p>
+            <div className="relative z-10 text-center px-8 flex flex-col items-center gap-6">
+              <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-1.5">
+                Sign in to{' '}
+                <span
+                  style={{
+                    fontFamily: "'Pacifico', cursive",
+                    fontSize: '24px',
+                    fontWeight: 400,
+                    color: '#F97316',
+                    letterSpacing: '0.5px',
+                  }}
+                >
+                  Whacka
+                </span>
+              </h2>
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="text-[15px] text-slate-700 leading-relaxed">Save your apps,</span>
+                <span className="text-[15px] text-slate-700 leading-relaxed">track your browsing history,</span>
+                <span className="text-[15px] text-slate-700 leading-relaxed">pick up right where you left off</span>
+                <span className="text-[15px] text-slate-700 leading-relaxed">...</span>
+              </div>
               <motion.button
                 onClick={() => { setShowHomeGate(false); navigate('/auth'); }}
                 className="mt-2 px-8 py-3 rounded-full text-sm font-semibold text-white bg-slate-800 active:bg-slate-700 min-h-[44px]"
