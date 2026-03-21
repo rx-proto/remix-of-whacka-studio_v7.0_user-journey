@@ -76,6 +76,7 @@ const Index = () => {
   const handleTabChange = (tab: number) => {
     if (tab === 0 && !isLoggedIn) {
       setShowHomeGate(true);
+      // Don't change mainTab — keep current view but show gate overlay
       return;
     }
     setShowHomeGate(false);
