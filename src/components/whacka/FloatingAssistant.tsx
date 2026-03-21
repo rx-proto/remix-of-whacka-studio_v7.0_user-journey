@@ -172,6 +172,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
             setIsBuilding(false);
             setBuildComplete(true);
             setShowAutoSaveTip(true);
+            setShowBonusTip(true);
             setMessages(prev => [...prev, {
               role: 'assistant',
               content: 'Your app is ready! 🎉 The preview has been updated.',
