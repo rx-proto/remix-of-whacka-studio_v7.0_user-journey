@@ -335,9 +335,9 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
           <motion.div
             key="build-tab-view"
             className="fixed inset-0 z-30 bg-[#F9FAFB]"
-            initial={{ x: prevTabPos > 1 ? '-100%' : '100%', opacity: 0 }}
+            initial={{ x: '100%', opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: mainTab === 0 || (mainTab === 1 && true) ? '-100%' : '100%', opacity: 0 }}
+            exit={{ x: '100%', opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             <BuildTabView
