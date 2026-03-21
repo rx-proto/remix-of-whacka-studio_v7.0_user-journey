@@ -84,10 +84,6 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
           showNotification={isLoggedIn}
         />
 
-        {/* ── Hero Card ── */}
-        <motion.div variants={item} className="py-2">
-          <HeroCard />
-        </motion.div>
 
         {/* ── Editor's Picks — horizontal square cards ── */}
         <motion.div variants={item} className="space-y-3 py-2">

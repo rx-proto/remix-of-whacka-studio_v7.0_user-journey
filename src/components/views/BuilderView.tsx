@@ -219,7 +219,33 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
 
       {/* Chat Input - iOS style */}
       {mode === 0 && !isBuilding && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 pb-safe">
+        <div className="fixed bottom-0 left-0 right-0 p-4 pb-safe space-y-2.5">
+          {/* Auto-save tip */}
+          <AnimatePresence>
+            {showTip && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.25 }}
+                className="rounded-2xl px-4 py-3 flex items-start gap-3"
+                style={{
+                  background: 'rgba(255,255,255,0.75)',
+                  border: '1px solid rgba(0,0,0,0.06)',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+                }}
+              >
+                <p className="text-[13px] text-slate-700 leading-snug flex-1">
+                  Your app is auto saved & published. Share or add to phone screen through{' '}
+                  <Share size={13} className="inline-block text-slate-500 -mt-0.5" />{' '}
+                  anytime!
+                </p>
+                <button onClick={() => setShowTip(false)} className="text-slate-400 mt-0.5 flex-shrink-0">
+                  <X size={14} />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
           <div className="liquid-glass rounded-2xl p-3 space-y-2.5">
             <textarea
               placeholder="Ask for changes..."
