@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Menu, Share, ArrowRight, Mail, Lock } from 'lucide-react';
 import iconFittrack from '@/assets/icon-fittrack.png';
 import ShareDropdown from '../components/whacka/ShareDropdown';
+import OnboardingOverlay from '../components/whacka/OnboardingOverlay';
 import SideMenu from '../components/whacka/SideMenu';
 import FloatingAssistant from '../components/whacka/FloatingAssistant';
 import ExploreView from '../components/views/ExploreView';
@@ -555,6 +556,8 @@ const Index = () => {
           )}
         </AnimatePresence>
       </motion.div>
+
+      <OnboardingOverlay />
 
       <FloatingAssistant
         isLight={isLight}
