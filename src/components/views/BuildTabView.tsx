@@ -31,7 +31,7 @@ interface BuildTabViewProps {
 const generateBubbleLayout = (count: number) => {
   const cols = 2;
   const rows = Math.ceil(count / cols);
-  const cellW = 80 / cols;
+  const cellW = 90 / cols;
   // Bubbles span from ~20% to ~85% of the container height
   const startY = 20;
   const endY = 85;
@@ -44,20 +44,21 @@ const generateBubbleLayout = (count: number) => {
   };
   const rand = rng(42);
 
-  const bubbles: Array<{ x: number; y: number; delay: number; duration: number; dx: number; dy: number }> = [];
+  const bubbles: Array<{ x: number; y: number; delay: number; duration: number; dx: number; dy: number; bgAlpha: number }> = [];
 
   for (let i = 0; i < count; i++) {
     const col = i % cols;
     const row = Math.floor(i / cols);
-    const baseX = 6 + col * cellW;
+    const baseX = 2 + col * cellW;
     const baseY = startY + row * cellH;
     bubbles.push({
-      x: baseX + rand() * (cellW * 0.3),
+      x: baseX + rand() * (cellW * 0.2),
       y: baseY + rand() * (cellH * 0.2),
       delay: rand() * 4,
       duration: 4 + rand() * 3,
       dx: (rand() - 0.5) * 6,
       dy: (rand() - 0.5) * 5,
+      bgAlpha: i % 3 === 0 ? 0.35 : i % 3 === 1 ? 0.5 : 0.65,
     });
   }
   return bubbles;
@@ -137,7 +138,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
               style={{
                 left: `${layout.x}%`,
                 top: `${layout.y}%`,
-                background: 'rgba(255,255,255,0.6)',
+                background: `rgba(255,255,255,${layout.bgAlpha})`,
                 border: '1px solid rgba(255,255,255,0.7)',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               }}
