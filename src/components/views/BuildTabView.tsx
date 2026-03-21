@@ -127,7 +127,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
       </div>
 
       {/* Floating idea bubbles area */}
-      <div className="flex-1 relative overflow-hidden pt-14">
+      <div className="flex-1 relative overflow-hidden pt-14 z-0">
         {IDEAS.map((idea, i) => {
           const layout = BUBBLE_LAYOUT[i];
           return (
@@ -162,7 +162,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
       </div>
 
       {/* Input box – flat, minimal shadow, moved up */}
-      <div className="relative z-10 px-4 pb-4 -mt-8">
+      <div className="relative z-30 px-4 pb-4 -mt-12">
         <div
           className="w-full rounded-2xl px-3 py-2.5 flex flex-col gap-2"
           style={{
