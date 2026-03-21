@@ -296,18 +296,20 @@ const Index = () => {
 
               <main className="h-full overflow-hidden relative">
                 <AnimatePresence initial={false} mode="popLayout" custom={slideDir.current}>
-                  <motion.div
-                    key={tabContent[mainTab].key}
-                    custom={slideDir.current}
-                    className="absolute inset-0 overflow-y-auto"
-                    variants={tabVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  >
-                    {tabContent[mainTab].content}
-                  </motion.div>
+                  {tabContent[mainTab] && (
+                    <motion.div
+                      key={tabContent[mainTab].key}
+                      custom={slideDir.current}
+                      className="absolute inset-0 overflow-y-auto"
+                      variants={tabVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    >
+                      {tabContent[mainTab].content}
+                    </motion.div>
+                  )}
                 </AnimatePresence>
               </main>
             </motion.div>
