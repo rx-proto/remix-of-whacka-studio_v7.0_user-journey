@@ -31,7 +31,7 @@ interface BuildTabViewProps {
 const generateBubbleLayout = (count: number) => {
   const cols = 2;
   const rows = Math.ceil(count / cols);
-  const cellW = 80 / cols;
+  const cellW = 90 / cols;
   // Bubbles span from ~20% to ~85% of the container height
   const startY = 20;
   const endY = 85;
