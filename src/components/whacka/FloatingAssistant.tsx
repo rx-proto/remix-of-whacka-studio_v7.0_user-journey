@@ -334,14 +334,15 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
       )}
 
       {/* ===== BUILD TAB VIEW (inline, when tab 2 is active) ===== */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" custom={buildSlideDir}>
         {appView === 'explore' && mainTab === 2 && (
           <motion.div
             key="build-tab-view"
             className="fixed inset-0 z-30 bg-[#F9FAFB]"
-            initial={{ x: '100%', opacity: 0 }}
+            custom={buildSlideDir}
+            initial={(dir: number) => ({ x: `${dir * 100}%`, opacity: 0 })}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: '100%', opacity: 0 }}
+            exit={(dir: number) => ({ x: `${dir * 100}%`, opacity: 0 })}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             <BuildTabView
