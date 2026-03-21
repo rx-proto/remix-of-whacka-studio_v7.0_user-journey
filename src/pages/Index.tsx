@@ -83,6 +83,9 @@ const Index = () => {
       return;
     }
     setShowHomeGate(false);
+    setGateExpanded(false);
+    setGateEmail('');
+    setGatePassword('');
     setPrevTab(mainTab);
     setMainTab(tab);
   };
