@@ -498,6 +498,7 @@ const Index = () => {
         hideTabBar={false}
         isLoggedIn={isLoggedIn}
         onRequireAuth={handleRequireAuth}
+        homeGateActive={showHomeGate}
       />
     </div>
   );
