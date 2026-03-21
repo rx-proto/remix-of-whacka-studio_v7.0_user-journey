@@ -559,7 +559,7 @@ const Index = () => {
         </AnimatePresence>
       </motion.div>
 
-      <OnboardingOverlay />
+      <OnboardingOverlay forceShow={showOnboarding} onDone={() => setShowOnboarding(false)} />
 
       <FloatingAssistant
         isLight={isLight}
