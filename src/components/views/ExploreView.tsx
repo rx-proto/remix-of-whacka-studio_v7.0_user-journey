@@ -73,15 +73,16 @@ interface ExploreViewProps {
 const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, onOpenUser, onOpenNotifications, onOpenMenu, isLoggedIn = true, initialPlaylist, onPlaylistConsumed }) => {
   const { user } = useAuth();
   const [showBanner, setShowBanner] = useState(true);
+  const [showTipDrawer, setShowTipDrawer] = useState(false);
 
   return (
     <div className="relative min-h-screen">
 
       <motion.div variants={container} initial="hidden" animate="show" className="relative z-10">
-        {/* Sticky Menu + Bell bar with scroll-reveal */}
         <StickyTopBar
           onOpenMenu={onOpenMenu}
           onOpenNotifications={onOpenNotifications}
+          onOpenTip={() => setShowTipDrawer(true)}
           showNotification={isLoggedIn}
         />
 
