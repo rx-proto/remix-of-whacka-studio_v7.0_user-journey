@@ -557,6 +557,8 @@ const Index = () => {
         </AnimatePresence>
       </motion.div>
 
+      <OnboardingOverlay />
+
       <FloatingAssistant
         isLight={isLight}
         appView={appView}
