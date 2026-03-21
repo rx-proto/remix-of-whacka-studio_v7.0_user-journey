@@ -73,6 +73,10 @@ interface FloatingAssistantProps {
 }
 
 const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView, onViewChange, appName: externalAppName, appDesc: externalAppDesc, mainTab = 0, onMainTabChange, isPanelOpen = false, onPanelOpenChange, panelType = 'preview', hideTabBar = false, sidebarOpen = false, isLoggedIn = true, onRequireAuth }) => {
+  const prevMainTabRef = useRef(mainTab);
+  useEffect(() => {
+    prevMainTabRef.current = mainTab;
+  });
   // Capsule input state (explore/studio page only)
   const [isCapsuleOpen, setIsCapsuleOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'chat' | 'versions' | 'config' | 'publish' | 'comment'>('chat');
@@ -313,6 +317,11 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
     onPanelOpenChange?.(newVal);
   };
 
+  // Visual order: Home(0)=0, Build(2)=1, Explore(1)=2
+  const TAB_POS: Record<number, number> = { 0: 0, 1: 2, 2: 1 };
+  const prevPos = TAB_POS[prevMainTabRef.current] ?? prevMainTabRef.current;
+  const buildSlideX = prevPos < 1 ? '100%' : '-100%';
+
   return (
     <>
       {/* ===== BOTTOM TAB BAR (explore/home views only) ===== */}
@@ -335,9 +344,9 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
           <motion.div
             key="build-tab-view"
             className="fixed inset-0 z-30 bg-[#F9FAFB]"
-            initial={{ x: '100%', opacity: 0 }}
+            initial={{ x: buildSlideX, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: '100%', opacity: 0 }}
+            exit={{ x: buildSlideX, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             <BuildTabView

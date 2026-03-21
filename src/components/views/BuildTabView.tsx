@@ -3,22 +3,22 @@ import { motion } from 'framer-motion';
 import { Mic, Send, Square } from 'lucide-react';
 
 const IDEAS = [
-  'Build a "turn me into a magic character" generator',
-  'Create a pet mood tracker with behavior predictions',
-  'Make a daily fortune cookie with generative art',
-  'Design a recipe app that uses fridge photos',
-  'Build a habit tracker with streak animations',
-  'Create a dream journal with AI interpretations',
-  'Make a plant care reminder with photo diagnosis',
-  'Build a movie night picker for couples',
-  'Design a micro-journal that asks one question daily',
-  'Create a walk tracker that draws art from routes',
-  'Build a language flashcard app with spaced repetition',
-  'Make a birthday countdown with gift idea suggestions',
-  'Create a mood playlist generator from selfies',
-  'Build a travel bucket list with cost estimates',
-  'Design a daily sketch challenge app',
-  'Make a gratitude jar that shows past entries randomly',
+  'Build a magic character generator',
+  'Create a pet mood tracker',
+  'Make a daily fortune cookie app',
+  'Design a recipe finder from fridge photos',
+  'Build a habit tracker with streaks',
+  'Create a dream journal with AI',
+  'Make a plant care reminder app',
+  'Build a movie night picker',
+  'Design a micro-journal app',
+  'Create a walk art tracker',
+  'Build language flashcards',
+  'Make a birthday countdown app',
+  'Create a mood playlist generator',
+  'Build a travel bucket list',
+  'Design a daily sketch challenge',
+  'Make a gratitude jar app',
 ];
 
 interface BuildTabViewProps {
@@ -33,23 +33,34 @@ interface BuildTabViewProps {
   onStopBuild?: () => void;
 }
 
-// Generate random but stable bubble positions
+// Grid-based layout to avoid overlaps
 const generateBubbleLayout = (count: number) => {
-  const bubbles: Array<{ x: number; y: number; delay: number; duration: number; dx: number; dy: number }> = [];
+  const cols = 3;
+  const rows = Math.ceil(count / cols);
+  const cellW = 90 / cols;  // percentage width per cell
+  const cellH = 80 / rows;  // percentage height per cell (use 80% of area)
+  
   const rng = (seed: number) => {
     let s = seed;
     return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
   };
   const rand = rng(42);
 
+  const bubbles: Array<{ x: number; y: number; delay: number; duration: number; dx: number; dy: number }> = [];
+  
   for (let i = 0; i < count; i++) {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    // Place within cell with some jitter
+    const baseX = 5 + col * cellW;
+    const baseY = 3 + row * cellH;
     bubbles.push({
-      x: rand() * 80 + 5,       // 5-85% from left
-      y: rand() * 55 + 5,       // 5-60% from top
-      delay: rand() * 3,
-      duration: 3 + rand() * 3, // 3-6s float cycle
-      dx: (rand() - 0.5) * 12,  // float range x
-      dy: (rand() - 0.5) * 10,  // float range y
+      x: baseX + rand() * (cellW * 0.5),
+      y: baseY + rand() * (cellH * 0.4),
+      delay: rand() * 4,
+      duration: 4 + rand() * 3,
+      dx: (rand() - 0.5) * 8,
+      dy: (rand() - 0.5) * 6,
     });
   }
   return bubbles;
@@ -71,13 +82,13 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
   return (
     <div className="relative flex flex-col h-full overflow-hidden">
       {/* Floating idea bubbles area */}
-      <div className="flex-1 relative overflow-hidden">
+      <div className="flex-1 relative overflow-hidden pt-14">
         {IDEAS.map((idea, i) => {
           const layout = BUBBLE_LAYOUT[i];
           return (
             <motion.button
               key={i}
-              className="absolute max-w-[200px] px-3 py-2 rounded-2xl text-[12px] leading-snug text-left"
+              className="absolute max-w-[140px] px-3 py-2 rounded-2xl text-[11px] leading-snug text-left"
               style={{
                 left: `${layout.x}%`,
                 top: `${layout.y}%`,
@@ -86,13 +97,13 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
                 border: '1px solid rgba(255,255,255,0.45)',
                 boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.6), 0 4px 16px rgba(0,0,0,0.06)',
-                color: 'rgba(0,0,0,0.55)',
+                color: 'rgba(0,0,0,0.5)',
               }}
               onClick={() => onBubbleClick(idea)}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 10 }}
               animate={{
-                opacity: [0.5, 0.8, 0.5],
+                opacity: [0.45, 0.75, 0.45],
                 x: [0, layout.dx, 0],
                 y: [0, layout.dy, 0],
               }}
