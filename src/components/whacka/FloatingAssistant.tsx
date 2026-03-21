@@ -73,6 +73,10 @@ interface FloatingAssistantProps {
 }
 
 const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView, onViewChange, appName: externalAppName, appDesc: externalAppDesc, mainTab = 0, onMainTabChange, isPanelOpen = false, onPanelOpenChange, panelType = 'preview', hideTabBar = false, sidebarOpen = false, isLoggedIn = true, onRequireAuth }) => {
+  const prevMainTabRef = useRef(mainTab);
+  useEffect(() => {
+    prevMainTabRef.current = mainTab;
+  });
   // Capsule input state (explore/studio page only)
   const [isCapsuleOpen, setIsCapsuleOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'chat' | 'versions' | 'config' | 'publish' | 'comment'>('chat');
