@@ -77,7 +77,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
   onStopBuild,
 }) => {
   return (
-    <div className="relative flex flex-col h-full overflow-hidden">
+    <div className="relative flex flex-col h-full overflow-hidden pb-[calc(env(safe-area-inset-bottom,0px)+56px+16px)]">
       {/* Warm gradient background blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
