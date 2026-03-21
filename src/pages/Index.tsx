@@ -418,17 +418,15 @@ const Index = () => {
             >
 
               <main className="h-full overflow-hidden relative">
-                <AnimatePresence initial={false} mode="popLayout" custom={slideDir.current}>
+                <AnimatePresence initial={false} mode="wait">
                   {tabContent[mainTab] && (
                     <motion.div
                       key={tabContent[mainTab].key}
-                      custom={slideDir.current}
                       className="absolute inset-0 overflow-y-auto"
-                      variants={tabVariants}
-                      initial={false}
-                      animate="center"
-                      exit="exit"
-                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
                     >
                       {tabContent[mainTab].content}
                     </motion.div>
