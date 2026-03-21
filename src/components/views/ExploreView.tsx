@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 import { RefreshCw } from 'lucide-react';
 import StickyTopBar from '@/components/whacka/StickyTopBar';
 import PlaylistsSection from './PlaylistsSection';
@@ -72,15 +73,16 @@ interface ExploreViewProps {
 const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, onOpenUser, onOpenNotifications, onOpenMenu, isLoggedIn = true, initialPlaylist, onPlaylistConsumed }) => {
   const { user } = useAuth();
   const [showBanner, setShowBanner] = useState(true);
+  const [showTipDrawer, setShowTipDrawer] = useState(false);
 
   return (
     <div className="relative min-h-screen">
 
       <motion.div variants={container} initial="hidden" animate="show" className="relative z-10">
-        {/* Sticky Menu + Bell bar with scroll-reveal */}
         <StickyTopBar
           onOpenMenu={onOpenMenu}
           onOpenNotifications={onOpenNotifications}
+          onOpenTip={() => setShowTipDrawer(true)}
           showNotification={isLoggedIn}
         />
 
@@ -190,6 +192,74 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
       </AnimatePresence>
 
       <div className="h-20" />
+
+      {/* Add to Home Screen tip drawer */}
+      <AnimatePresence>
+        {showTipDrawer && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/40"
+              onClick={() => setShowTipDrawer(false)}
+            />
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl max-h-[85vh] overflow-y-auto"
+              style={{ boxShadow: '0 -4px 30px rgba(0,0,0,0.12)' }}
+            >
+              {/* Handle */}
+              <div className="flex justify-center pt-3 pb-1">
+                <div className="w-10 h-1 rounded-full bg-slate-300" />
+              </div>
+              {/* Close */}
+              <button
+                onClick={() => setShowTipDrawer(false)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"
+              >
+                <X size={16} className="text-slate-500" />
+              </button>
+
+              <div className="px-6 pb-8 pt-2 space-y-5">
+                {/* Video */}
+                <div className="rounded-2xl overflow-hidden" style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.1)' }}>
+                  <video
+                    src="/videos/add-to-homescreen.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full"
+                  />
+                </div>
+
+                {/* Title */}
+                <h2 className="text-xl font-bold text-slate-900 text-center leading-snug">
+                  Add to Home Screen
+                </h2>
+
+                {/* Instructions */}
+                <ul className="space-y-3 text-[15px] text-slate-500">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0" />
+                    Open your browser menu
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0" />
+                    <span>
+                      Tap <strong className="text-slate-900">Add to Home Screen</strong> or <strong className="text-slate-900">Install app</strong>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
