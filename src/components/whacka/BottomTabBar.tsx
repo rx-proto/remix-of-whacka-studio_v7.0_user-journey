@@ -1,21 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, Home, Plus } from 'lucide-react';
+import { Compass, Home, Sparkle } from 'lucide-react';
 
 interface BottomTabBarProps {
   activeTab: number;
   onTabChange: (index: number) => void;
-  onCreateClick: () => void;
+  onCreateClick?: () => void;
 }
 
 const BAR_HEIGHT = 56;
-const PLUS_W = 60;
-const SPRING = { type: 'spring' as const, stiffness: 350, damping: 30 };
 
 const BottomTabBar: React.FC<BottomTabBarProps> = ({
   activeTab,
   onTabChange,
-  onCreateClick,
 }) => {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[999] flex justify-center pb-[calc(env(safe-area-inset-bottom,0px)+24px)] px-14">
@@ -36,21 +33,18 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
             />
           </div>
 
-          {/* Create button – orange-pink gradient rounded rect */}
-          <motion.button
-            className="relative z-20 flex items-center justify-center rounded-full mx-1.5 flex-shrink-0"
-            style={{ width: PLUS_W, height: BAR_HEIGHT - 16 }}
-            onClick={onCreateClick}
-            whileTap={{ scale: 0.88 }}
-          >
-            <div
-              className="absolute inset-0 rounded-full overflow-hidden bg-black"
-              style={{
-                boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-              }}
+          {/* Build tab – Sparkle icon */}
+          <div className="flex-1 flex justify-center" style={{ minWidth: 0 }}>
+            <TabButton
+              icon={Sparkle}
+              label="Build"
+              isActive={activeTab === 2}
+              onClick={() => onTabChange(2)}
+              height={BAR_HEIGHT}
+              iconSize={19}
+              filledIcon={SparkleFilledIcon}
             />
-            <Plus size={19} strokeWidth={2.2} className="relative z-10 text-white" />
-          </motion.button>
+          </div>
 
           {/* Explore tab */}
           <div className="flex-1 flex justify-center" style={{ minWidth: 0 }}>
@@ -69,22 +63,22 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
   );
 };
 
+const SparkleFilledIcon: React.FC<{ size: number }> = ({ size }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
+      fill="currentColor" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round"
+    />
+  </svg>
+);
 
-/* Filled Home icon: house outline filled, door cutout white */
 const HomeFilled: React.FC<{ size: number }> = ({ size }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <path
-      d="M3 10.182V22h18V10.182L12 2L3 10.182Z"
-      fill="currentColor"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinejoin="round"
-    />
+    <path d="M3 10.182V22h18V10.182L12 2L3 10.182Z" fill="currentColor" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" />
     <rect x="9" y="14" width="6" height="8" rx="1" fill="white" />
   </svg>
 );
 
-/* Filled Compass icon: outer circle filled, inner diamond/circle cutout white */
 const CompassFilled: React.FC<{ size: number }> = ({ size }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <circle cx="12" cy="12" r="10" fill="currentColor" stroke="currentColor" strokeWidth={2} />
@@ -92,7 +86,6 @@ const CompassFilled: React.FC<{ size: number }> = ({ size }) => (
   </svg>
 );
 
-/* Small helper for tab buttons */
 const TabButton: React.FC<{
   icon: React.ElementType;
   label: string;
@@ -100,7 +93,8 @@ const TabButton: React.FC<{
   onClick: () => void;
   height: number;
   iconSize?: number;
-}> = ({ icon: Icon, label, isActive, onClick, height, iconSize = 18 }) => (
+  filledIcon?: React.FC<{ size: number }>;
+}> = ({ icon: Icon, label, isActive, onClick, height, iconSize = 18, filledIcon: FilledIcon }) => (
   <motion.button
     onClick={onClick}
     className="relative z-10 flex flex-col items-center gap-0.5 px-5 py-1 rounded-full justify-center flex-1 text-foreground"
@@ -108,6 +102,7 @@ const TabButton: React.FC<{
     whileTap={{ scale: 0.92 }}
   >
     {isActive ? (
+      FilledIcon ? <FilledIcon size={iconSize} /> :
       Icon === Home ? <HomeFilled size={iconSize} /> : <CompassFilled size={iconSize} />
     ) : (
       <Icon size={iconSize} strokeWidth={1.5} />

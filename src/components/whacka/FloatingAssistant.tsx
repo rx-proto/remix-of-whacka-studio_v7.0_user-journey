@@ -11,6 +11,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import VoiceWave from './VoiceWave';
 import BottomTabBar from './BottomTabBar';
 import CreatePanel from './CreatePanel';
+import BuildTabView from '../views/BuildTabView';
 import type { AppView } from '../../pages/Index';
 
 /* Hand-drawn star SVG - matches BottomTabBar */
@@ -324,25 +325,30 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
         <BottomTabBar
           activeTab={mainTab}
           onTabChange={(i) => onMainTabChange?.(i)}
-          onCreateClick={() => setIsCapsuleOpen(true)}
         />
         </motion.div>
       )}
 
-      {/* ===== CREATE PANEL (explore/home views) ===== */}
-      {appView === 'explore' && (
-        <CreatePanel
-          isOpen={isCapsuleOpen}
-          onClose={() => setIsCapsuleOpen(false)}
-          inputText={capsuleText}
-          onInputChange={setCapsuleText}
-          onSend={handleCapsuleSend}
-          onBubbleClick={(text) => setCapsuleText(text)}
-          onMicPressStart={handleVoicePressStart}
-          onMicPressEnd={handleVoicePressEnd}
-          onMicPressCancel={handlePressCancel}
-          isBuilding={isBuilding}
-        />
+      {/* ===== BUILD TAB VIEW (inline, when tab 2 is active) ===== */}
+      {appView === 'explore' && mainTab === 2 && (
+        <motion.div
+          className="fixed inset-0 z-30 bg-[#F9FAFB]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <BuildTabView
+            inputText={capsuleText}
+            onInputChange={setCapsuleText}
+            onSend={handleCapsuleSend}
+            onBubbleClick={(text) => setCapsuleText(text)}
+            onMicPressStart={handleVoicePressStart}
+            onMicPressEnd={handleVoicePressEnd}
+            onMicPressCancel={handlePressCancel}
+            isBuilding={isBuilding}
+          />
+        </motion.div>
       )}
 
       {/* ===== DRAWER PANEL - portaled to body ===== */}
