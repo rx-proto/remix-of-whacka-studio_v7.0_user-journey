@@ -49,9 +49,10 @@ const STORAGE_KEY = 'whacka-onboarding-done';
 
 interface OnboardingOverlayProps {
   forceShow?: boolean;
+  onDone?: () => void;
 }
 
-const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow }) => {
+const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone }) => {
   const [step, setStep] = useState(0);
   const [visible, setVisible] = useState(false);
 
@@ -61,15 +62,18 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow }) => {
     if (!done) setVisible(true);
   }, [forceShow]);
 
-  const handleNext = () => {
-    if (step < STEPS.length - 1) setStep(step + 1);
-    else { setVisible(false); localStorage.setItem(STORAGE_KEY, 'true'); }
-  };
-
-  const handleSkip = () => {
+  const dismiss = () => {
     setVisible(false);
     localStorage.setItem(STORAGE_KEY, 'true');
+    onDone?.();
   };
+
+  const handleNext = () => {
+    if (step < STEPS.length - 1) setStep(step + 1);
+    else dismiss();
+  };
+
+  const handleSkip = () => dismiss();
 
   if (!visible) return null;
 

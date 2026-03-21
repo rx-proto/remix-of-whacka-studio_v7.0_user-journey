@@ -68,9 +68,10 @@ interface ExploreViewProps {
   onOpenMenu?: () => void;
   initialPlaylist?: string;
   onPlaylistConsumed?: () => void;
+  onTestOnboarding?: () => void;
 }
 
-const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, onOpenUser, onOpenNotifications, onOpenMenu, isLoggedIn = true, initialPlaylist, onPlaylistConsumed }) => {
+const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, onOpenUser, onOpenNotifications, onOpenMenu, isLoggedIn = true, initialPlaylist, onPlaylistConsumed, onTestOnboarding }) => {
   const { user } = useAuth();
   const [showBanner, setShowBanner] = useState(true);
   const [showTipDrawer, setShowTipDrawer] = useState(false);
@@ -83,6 +84,7 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
           onOpenMenu={onOpenMenu}
           onOpenNotifications={onOpenNotifications}
           onOpenTip={() => setShowTipDrawer(true)}
+          onTestOnboarding={onTestOnboarding}
           showNotification={isLoggedIn}
         />
 

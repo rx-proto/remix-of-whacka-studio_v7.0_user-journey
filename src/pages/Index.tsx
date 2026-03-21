@@ -54,6 +54,7 @@ const Index = () => {
   const [notifInitialTab, setNotifInitialTab] = useState<string>('All');
   const [profileAuthor, setProfileAuthor] = useState<string>('');
   const [initialPlaylist, setInitialPlaylist] = useState<string | undefined>(undefined);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const handleOpenUser = (authorName: string) => {
     setProfileAuthor(authorName);
@@ -197,6 +198,7 @@ const Index = () => {
           onOpenMenu={() => setShowProfile(true)}
           initialPlaylist={initialPlaylist}
           onPlaylistConsumed={() => setInitialPlaylist(undefined)}
+          onTestOnboarding={() => setShowOnboarding(true)}
         />
       ),
     },
@@ -557,7 +559,7 @@ const Index = () => {
         </AnimatePresence>
       </motion.div>
 
-      <OnboardingOverlay />
+      <OnboardingOverlay forceShow={showOnboarding} onDone={() => setShowOnboarding(false)} />
 
       <FloatingAssistant
         isLight={isLight}
