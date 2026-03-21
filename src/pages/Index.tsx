@@ -289,10 +289,8 @@ const Index = () => {
             <motion.div
               key="explore-shell"
               className="relative flex-1 min-h-0"
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
             >
 
               <main className="h-full overflow-hidden relative">
