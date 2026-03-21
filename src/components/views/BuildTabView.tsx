@@ -138,7 +138,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
               style={{
                 left: `${layout.x}%`,
                 top: `${layout.y}%`,
-                background: 'rgba(255,255,255,0.6)',
+                background: `rgba(255,255,255,${layout.bgAlpha})`,
                 border: '1px solid rgba(255,255,255,0.7)',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               }}
