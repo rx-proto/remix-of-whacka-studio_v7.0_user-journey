@@ -201,7 +201,7 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/40"
+              className="fixed inset-0 z-[9999] bg-black/40"
               onClick={() => setShowTipDrawer(false)}
             />
             <motion.div
@@ -209,7 +209,7 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl max-h-[85vh] overflow-y-auto"
+              className="fixed bottom-0 left-0 right-0 z-[10000] bg-white rounded-t-3xl max-h-[85vh] overflow-y-auto"
               style={{ boxShadow: '0 -4px 30px rgba(0,0,0,0.12)' }}
             >
               {/* Handle */}
@@ -225,8 +225,8 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
               </button>
 
               <div className="px-6 pb-8 pt-2 space-y-5">
-                {/* Video */}
-                <div className="rounded-2xl overflow-hidden" style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.1)' }}>
+                {/* Video — scaled down like reference */}
+                <div className="mx-auto w-[65%] rounded-2xl overflow-hidden" style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.1)' }}>
                   <video
                     src="/videos/add-to-homescreen.mp4"
                     autoPlay
