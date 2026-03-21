@@ -14,6 +14,13 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
   activeTab,
   onTabChange,
 }) => {
+  // Visual order: Home(0), Build(2), Explore(1)
+  const tabs = [
+    { index: 0, icon: Home, label: 'Home', iconSize: 18, filledIcon: HomeFilled },
+    { index: 2, icon: Sparkle, label: 'Build', iconSize: 19, filledIcon: SparkleFilledIcon },
+    { index: 1, icon: Compass, label: 'Explore', iconSize: 20, filledIcon: CompassFilled },
+  ];
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[999] flex justify-center pb-[calc(env(safe-area-inset-bottom,0px)+24px)] px-14">
       <div
@@ -21,42 +28,31 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
         style={{ height: BAR_HEIGHT }}
       >
         <div className="flex items-center w-full p-1 relative" style={{ height: BAR_HEIGHT }}>
-          {/* Home tab */}
-          <div className="flex-1 flex justify-center" style={{ minWidth: 0 }}>
-            <TabButton
-              icon={Home}
-              label="Home"
-              isActive={activeTab === 0}
-              onClick={() => onTabChange(0)}
-              height={BAR_HEIGHT}
-              iconSize={18}
-            />
-          </div>
-
-          {/* Build tab – Sparkle icon */}
-          <div className="flex-1 flex justify-center" style={{ minWidth: 0 }}>
-            <TabButton
-              icon={Sparkle}
-              label="Build"
-              isActive={activeTab === 2}
-              onClick={() => onTabChange(2)}
-              height={BAR_HEIGHT}
-              iconSize={19}
-              filledIcon={SparkleFilledIcon}
-            />
-          </div>
-
-          {/* Explore tab */}
-          <div className="flex-1 flex justify-center" style={{ minWidth: 0 }}>
-            <TabButton
-              icon={Compass}
-              label="Explore"
-              isActive={activeTab === 1}
-              onClick={() => onTabChange(1)}
-              height={BAR_HEIGHT}
-              iconSize={20}
-            />
-          </div>
+          {tabs.map((tab) => (
+            <div key={tab.index} className="flex-1 flex justify-center relative" style={{ minWidth: 0 }}>
+              {/* Active tab white highlight background */}
+              {activeTab === tab.index && (
+                <motion.div
+                  layoutId="tab-highlight"
+                  className="absolute inset-1 rounded-full"
+                  style={{
+                    background: 'rgba(255,255,255,0.55)',
+                    boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.8), 0 1px 3px rgba(0,0,0,0.06)',
+                  }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                />
+              )}
+              <TabButton
+                icon={tab.icon}
+                label={tab.label}
+                isActive={activeTab === tab.index}
+                onClick={() => onTabChange(tab.index)}
+                height={BAR_HEIGHT}
+                iconSize={tab.iconSize}
+                filledIcon={tab.filledIcon}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -103,11 +99,11 @@ const TabButton: React.FC<{
   >
     {isActive ? (
       FilledIcon ? <FilledIcon size={iconSize} /> :
-      Icon === Home ? <HomeFilled size={iconSize} /> : <CompassFilled size={iconSize} />
+      <Icon size={iconSize} strokeWidth={2} />
     ) : (
       <Icon size={iconSize} strokeWidth={1.5} />
     )}
-    <span className="text-[10px] font-medium leading-none">{label}</span>
+    <span className={`text-[10px] leading-none ${isActive ? 'font-semibold' : 'font-medium'}`}>{label}</span>
   </motion.button>
 );
 
