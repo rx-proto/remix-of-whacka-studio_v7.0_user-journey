@@ -44,7 +44,7 @@ const generateBubbleLayout = (count: number) => {
   };
   const rand = rng(42);
 
-  const bubbles: Array<{ x: number; y: number; delay: number; duration: number; dx: number; dy: number }> = [];
+  const bubbles: Array<{ x: number; y: number; delay: number; duration: number; dx: number; dy: number; bgAlpha: number }> = [];
 
   for (let i = 0; i < count; i++) {
     const col = i % cols;
