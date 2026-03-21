@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Menu, Share } from 'lucide-react';
+import { ArrowLeft, Menu, Share, ArrowRight, Mail, Lock } from 'lucide-react';
 import iconFittrack from '@/assets/icon-fittrack.png';
 import ShareDropdown from '../components/whacka/ShareDropdown';
 import SideMenu from '../components/whacka/SideMenu';
