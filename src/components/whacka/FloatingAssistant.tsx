@@ -70,9 +70,10 @@ interface FloatingAssistantProps {
   sidebarOpen?: boolean;
   isLoggedIn?: boolean;
   onRequireAuth?: () => void;
+  homeGateActive?: boolean;
 }
 
-const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView, onViewChange, appName: externalAppName, appDesc: externalAppDesc, mainTab = 0, onMainTabChange, isPanelOpen = false, onPanelOpenChange, panelType = 'preview', hideTabBar = false, sidebarOpen = false, isLoggedIn = true, onRequireAuth }) => {
+const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView, onViewChange, appName: externalAppName, appDesc: externalAppDesc, mainTab = 0, onMainTabChange, isPanelOpen = false, onPanelOpenChange, panelType = 'preview', hideTabBar = false, sidebarOpen = false, isLoggedIn = true, onRequireAuth, homeGateActive = false }) => {
   const prevMainTabRef = useRef(mainTab);
   useEffect(() => {
     prevMainTabRef.current = mainTab;
@@ -332,7 +333,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
           className="fixed bottom-0 left-0 right-0 z-40"
         >
         <BottomTabBar
-          activeTab={mainTab}
+          activeTab={homeGateActive ? 0 : mainTab}
           onTabChange={(i) => onMainTabChange?.(i)}
         />
         </motion.div>
