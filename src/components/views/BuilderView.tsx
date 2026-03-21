@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Share2, Check, Loader2, ExternalLink, Copy, Send, Paperclip, Mic, Pencil } from 'lucide-react';
+import { ArrowLeft, Share2, Check, Loader2, ExternalLink, Copy, Send, Paperclip, Mic, Pencil, Share, X } from 'lucide-react';
 import SegmentedControl from '../whacka/SegmentedControl';
 import GlassCard from '../whacka/GlassCard';
 import LiquidButton from '../whacka/LiquidButton';
