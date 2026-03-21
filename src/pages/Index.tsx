@@ -83,6 +83,9 @@ const Index = () => {
       return;
     }
     setShowHomeGate(false);
+    setGateExpanded(false);
+    setGateEmail('');
+    setGatePassword('');
     setPrevTab(mainTab);
     setMainTab(tab);
   };
@@ -256,7 +259,7 @@ const Index = () => {
               <div className="absolute rounded-full" style={{ width: '85vw', height: '85vw', left: '20%', top: '25%', background: 'radial-gradient(circle, rgba(255,160,90,0.16) 0%, rgba(255,160,90,0) 65%)', filter: 'blur(60px)' }} />
               <div className="absolute rounded-full" style={{ width: '80vw', height: '80vw', left: '10%', top: '40%', background: 'radial-gradient(circle, rgba(255,220,130,0.15) 0%, rgba(255,220,130,0) 65%)', filter: 'blur(50px)' }} />
             </div>
-            <div className="relative z-10 text-center px-8 flex flex-col items-center gap-6">
+            <div className="relative z-10 text-center px-8 flex flex-col items-center gap-6" style={{ marginTop: '-10vh' }}>
               <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-1.5">
                 Sign in to{' '}
                 <span
