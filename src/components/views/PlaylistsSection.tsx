@@ -25,11 +25,20 @@ const trending = [
   { id: 13, name: 'Family Hub', icon: iconFamilyhub, likes: 98, author: 'Chen L.', comments: 31, highlight: 'New', desc: 'Family organization made simple', tagColor: '#00695C' },
 ];
 
+const PLAYLIST_ICONS: Record<string, JSX.Element> = {
+  Top: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 11a2 2 0 1 1-4 0 4 4 0 0 1 8 0 6 6 0 0 1-12 0 8 8 0 0 1 16 0 10 10 0 1 1-20 0 11.93 11.93 0 0 1 2.42-7.22 2 2 0 1 1 3.16 2.44"/></svg>,
+  Games: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11.146 15.854a1.207 1.207 0 0 1 1.708 0l1.56 1.56A2 2 0 0 1 15 18.828V21a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2.172a2 2 0 0 1 .586-1.414z"/><path d="M18.828 15a2 2 0 0 1-1.414-.586l-1.56-1.56a1.207 1.207 0 0 1 0-1.708l1.56-1.56A2 2 0 0 1 18.828 9H21a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1z"/><path d="M6.586 14.414A2 2 0 0 1 5.172 15H3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2.172a2 2 0 0 1 1.414.586l1.56 1.56a1.207 1.207 0 0 1 0 1.708z"/><path d="M9 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2.172a2 2 0 0 1-.586 1.414l-1.56 1.56a1.207 1.207 0 0 1-1.708 0l-1.56-1.56A2 2 0 0 1 9 5.172z"/></svg>,
+  Muse: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.001 15.085A1.5 1.5 0 0 1 9 16.5"/><circle cx="18.5" cy="8.5" r="3.5"/><circle cx="7.5" cy="16.5" r="5.5"/><circle cx="7.5" cy="4.5" r="2.5"/></svg>,
+  Life: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="9" r="7"/><circle cx="15" cy="15" r="7"/></svg>,
+  Tools: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.34 17.52a10 10 0 1 0-2.82 2.82"/><circle cx="19" cy="19" r="2"/><path d="m13.41 13.41 4.18 4.18"/><circle cx="12" cy="12" r="2"/></svg>,
+};
+
 const playlists: { name: string; appIds: number[] }[] = [
-  { name: 'Camera Fun', appIds: [5, 8, 9, 11, 12, 13, 6, 7, 10] },
-  { name: 'Abstract Games', appIds: [6, 7, 10] },
-  { name: 'Productivity', appIds: [7, 10, 5] },
-  { name: 'Private Editor', appIds: [8, 9, 6] },
+  { name: 'Top', appIds: [5, 8, 9, 11, 12, 13, 6, 7, 10] },
+  { name: 'Games', appIds: [6, 7, 10] },
+  { name: 'Muse', appIds: [7, 10, 5] },
+  { name: 'Life', appIds: [8, 9, 6] },
+  { name: 'Tools', appIds: [5, 10, 11] },
 ];
 
 const SWIPE_THRESHOLD = 50;
