@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Send, Paperclip, Mic, MessageSquare, MessageCircle, Clock,
-  Check, Loader2, Volume2, Copy, Share2, ImagePlus, Pencil, RefreshCw, Quote
+  Check, Loader2, Volume2, Copy, Share2, ImagePlus, Pencil, RefreshCw, Quote, Share, X
 } from 'lucide-react';
 import WhackaLogo from './WhackaLogo';
 import DetailsPanelContent from '../views/DetailsPanelContent';
