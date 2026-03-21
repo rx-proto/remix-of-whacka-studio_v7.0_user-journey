@@ -195,7 +195,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
 
             <div className="flex items-center gap-1.5">
               <motion.button
-                className="p-1.5 rounded-full text-muted-foreground flex items-center justify-center flex-shrink-0"
+                className="p-1.5 rounded-full text-slate-900 flex items-center justify-center flex-shrink-0"
                 style={{ minHeight: 32, minWidth: 32 }}
                 whileTap={{ scale: 0.9 }}
                 onMouseDown={onMicPressStart}
