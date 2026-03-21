@@ -349,7 +349,7 @@ const Index = () => {
               <p className="text-[13px] text-slate-500 mt-1">
                 Don't have an account?{' '}
                 <button
-                  onClick={() => { setShowHomeGate(false); setGateExpanded(false); navigate('/auth'); }}
+                  onClick={() => { setShowHomeGate(false); setGateExpanded(false); navigate('/auth?mode=register'); }}
                   className="text-slate-800 font-semibold underline underline-offset-2"
                 >
                   Sign up now
