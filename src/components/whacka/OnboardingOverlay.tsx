@@ -2,48 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface OnboardingStep {
-  text: string;
+  content: React.ReactNode;
   spotlight?: { cx: number; cy: number; r: number };
   textPosition: 'center' | 'above-bottom' | 'below-top';
+  showDots?: boolean;
+  dotIndex?: number; // index among dot-steps (0-3)
 }
 
-// Viewport 390x844
-// Bottom bar: px-14 (56px), height 56, bottom offset ~24px => bar top ~764, bar bottom ~820
-// Bar inner width = 278, starts x=56. 3 tabs each ~93px wide.
-// Home center: 56+46=102, Create center: 56+139=195, Explore center: 56+232=288
-// Tab vertical center: 764 + 28 = 792
-// Lightbulb: top bar px-4, right group gap-1. Approx center x=300, y=36
-
-const STEPS: OnboardingStep[] = [
-  {
-    text: 'Welcome to Whacka! You can create your own apps here and explore apps made by others.',
-    textPosition: 'center',
-  },
-  {
-    text: 'Browse apps made by others on the Explore page.',
-    spotlight: { cx: 288, cy: 792, r: 38 },
-    textPosition: 'above-bottom',
-  },
-  {
-    text: 'Create your app here. You get 15 free credits daily — earn bonus credits by creating and inviting friends.',
-    spotlight: { cx: 195, cy: 792, r: 38 },
-    textPosition: 'above-bottom',
-  },
-  {
-    text: 'View your created, remixed, and bookmarked apps in Home.',
-    spotlight: { cx: 102, cy: 792, r: 38 },
-    textPosition: 'above-bottom',
-  },
-  {
-    text: "Whacka lets you add any app to your phone's home screen and use it like a native app. You can always find the instructions here.",
-    spotlight: { cx: 300, cy: 38, r: 28 },
-    textPosition: 'below-top',
-  },
-  {
-    text: 'Have fun in Whacka! 🎉',
-    textPosition: 'center',
-  },
-];
+const TOTAL_DOT_STEPS = 4;
 
 const STORAGE_KEY = 'whacka-onboarding-done';
 
@@ -56,8 +22,89 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
   const [step, setStep] = useState(0);
   const [visible, setVisible] = useState(false);
 
+  const steps: OnboardingStep[] = [
+    // Step 0: Welcome — no dots, show "tap anywhere" hint
+    {
+      content: (
+        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+          Welcome to Whacka! You can create your own apps here and explore apps made by others.
+        </p>
+      ),
+      textPosition: 'center',
+      showDots: false,
+    },
+    // Step 1: Explore — dot 0
+    {
+      content: (
+        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+          Browse apps made by others on the <span style={{ color: '#F97316', fontWeight: 600 }}>Explore</span> page.
+        </p>
+      ),
+      spotlight: { cx: 288, cy: 792, r: 38 },
+      textPosition: 'above-bottom',
+      showDots: true,
+      dotIndex: 0,
+    },
+    // Step 2: Create — dot 1
+    {
+      content: (
+        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+          Create your app here. You get <span style={{ color: '#F97316', fontWeight: 600 }}>15 free credits daily</span> — earn bonus credits by creating and inviting friends.
+        </p>
+      ),
+      spotlight: { cx: 195, cy: 792, r: 38 },
+      textPosition: 'above-bottom',
+      showDots: true,
+      dotIndex: 1,
+    },
+    // Step 3: Home — dot 2
+    {
+      content: (
+        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+          View your <span style={{ color: '#F97316', fontWeight: 600 }}>created, remixed and bookmarked</span> apps in Home.
+        </p>
+      ),
+      spotlight: { cx: 102, cy: 792, r: 38 },
+      textPosition: 'above-bottom',
+      showDots: true,
+      dotIndex: 2,
+    },
+    // Step 4: Bulb — dot 3
+    {
+      content: (
+        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+          Whacka lets you add any app to your phone's home screen and use it <span style={{ color: '#F97316', fontWeight: 600 }}>like a native app</span>. You can always find the instructions here.
+        </p>
+      ),
+      spotlight: { cx: 310, cy: 38, r: 28 },
+      textPosition: 'below-top',
+      showDots: true,
+      dotIndex: 3,
+    },
+    // Step 5: Have fun — no dots
+    {
+      content: (
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-[22px] font-bold text-slate-800">Have fun in</span>
+          <span
+            style={{
+              fontFamily: "'Pacifico', cursive",
+              fontSize: '28px',
+              color: '#F97316',
+              lineHeight: 1.3,
+            }}
+          >
+            Whacka
+          </span>
+        </div>
+      ),
+      textPosition: 'center',
+      showDots: false,
+    },
+  ];
+
   useEffect(() => {
-    if (forceShow) { setVisible(true); return; }
+    if (forceShow) { setVisible(true); setStep(0); return; }
     const done = localStorage.getItem(STORAGE_KEY);
     if (!done) setVisible(true);
   }, [forceShow]);
@@ -69,7 +116,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
   };
 
   const handleNext = () => {
-    if (step < STEPS.length - 1) setStep(step + 1);
+    if (step < steps.length - 1) setStep(step + 1);
     else dismiss();
   };
 
@@ -77,7 +124,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
 
   if (!visible) return null;
 
-  const current = STEPS[step];
+  const current = steps[step];
   const sp = current.spotlight;
 
   return (
@@ -92,7 +139,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
           transition={{ duration: 0.3 }}
           onClick={handleNext}
         >
-          {/* Dark overlay with circular cutout via SVG mask */}
+          {/* Dark overlay with circular cutout */}
           <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
             <defs>
               <mask id="onboarding-mask">
@@ -123,8 +170,8 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
             className="absolute left-0 right-0 z-10 flex flex-col items-center px-6"
             style={{
               ...(current.textPosition === 'center' && { top: '50%', transform: 'translateY(-50%)' }),
-              ...(current.textPosition === 'above-bottom' && { bottom: 160 }),
-              ...(current.textPosition === 'below-top' && { top: 90 }),
+              ...(current.textPosition === 'above-bottom' && { bottom: 120 }),
+              ...(current.textPosition === 'below-top' && { top: 80 }),
             }}
           >
             <motion.div
@@ -135,26 +182,33 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
               className="text-center max-w-[300px] bg-white rounded-2xl px-6 py-5"
               style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.12)' }}
             >
-              <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
-                {current.text}
-              </p>
-              <div className="flex items-center justify-center gap-1.5 mt-4">
-                {STEPS.map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-1 rounded-full transition-all duration-300"
-                    style={{
-                      width: i === step ? 18 : 6,
-                      backgroundColor: i === step ? '#F97316' : '#e2e8f0',
-                    }}
-                  />
-                ))}
-              </div>
+              {current.content}
+
+              {/* Welcome step: tap hint instead of dots */}
+              {step === 0 && (
+                <p className="text-[12px] text-slate-400 mt-4">Tap anywhere to continue</p>
+              )}
+
+              {/* Dots for middle steps only */}
+              {current.showDots && (
+                <div className="flex items-center justify-center gap-1.5 mt-4">
+                  {Array.from({ length: TOTAL_DOT_STEPS }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="h-1 rounded-full transition-all duration-300"
+                      style={{
+                        width: i === current.dotIndex ? 18 : 6,
+                        backgroundColor: i === current.dotIndex ? '#F97316' : '#e2e8f0',
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </motion.div>
           </div>
 
-          {/* Skip — top left */}
-          {step < STEPS.length - 1 && (
+          {/* Skip — top left, hidden on first and last */}
+          {step > 0 && step < steps.length - 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); handleSkip(); }}
               className="absolute top-14 left-5 z-20 text-[13px] text-white/80 font-medium px-3 py-1.5 rounded-full"
