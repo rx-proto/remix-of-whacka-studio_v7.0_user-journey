@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mic, Send, Square } from 'lucide-react';
 
@@ -33,13 +33,13 @@ interface BuildTabViewProps {
   onStopBuild?: () => void;
 }
 
-// Grid-based layout to avoid overlaps
+// 2-column grid layout with jitter to avoid overlaps
 const generateBubbleLayout = (count: number) => {
-  const cols = 3;
+  const cols = 2;
   const rows = Math.ceil(count / cols);
-  const cellW = 90 / cols;  // percentage width per cell
-  const cellH = 80 / rows;  // percentage height per cell (use 80% of area)
-  
+  const cellW = 88 / cols;
+  const cellH = 75 / rows;
+
   const rng = (seed: number) => {
     let s = seed;
     return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
@@ -47,20 +47,19 @@ const generateBubbleLayout = (count: number) => {
   const rand = rng(42);
 
   const bubbles: Array<{ x: number; y: number; delay: number; duration: number; dx: number; dy: number }> = [];
-  
+
   for (let i = 0; i < count; i++) {
     const col = i % cols;
     const row = Math.floor(i / cols);
-    // Place within cell with some jitter
-    const baseX = 5 + col * cellW;
-    const baseY = 3 + row * cellH;
+    const baseX = 4 + col * cellW;
+    const baseY = 2 + row * cellH;
     bubbles.push({
-      x: baseX + rand() * (cellW * 0.5),
-      y: baseY + rand() * (cellH * 0.4),
+      x: baseX + rand() * (cellW * 0.35),
+      y: baseY + rand() * (cellH * 0.3),
       delay: rand() * 4,
       duration: 4 + rand() * 3,
-      dx: (rand() - 0.5) * 8,
-      dy: (rand() - 0.5) * 6,
+      dx: (rand() - 0.5) * 6,
+      dy: (rand() - 0.5) * 5,
     });
   }
   return bubbles;
@@ -81,6 +80,43 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
 }) => {
   return (
     <div className="relative flex flex-col h-full overflow-hidden">
+      {/* Warm gradient background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: '70vw',
+            height: '70vw',
+            left: '15%',
+            bottom: '18%',
+            background: 'radial-gradient(circle, rgba(255,127,110,0.18) 0%, rgba(255,127,110,0) 70%)',
+            filter: 'blur(40px)',
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: '60vw',
+            height: '60vw',
+            left: '30%',
+            bottom: '25%',
+            background: 'radial-gradient(circle, rgba(255,160,90,0.15) 0%, rgba(255,160,90,0) 70%)',
+            filter: 'blur(50px)',
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: '55vw',
+            height: '55vw',
+            left: '20%',
+            bottom: '30%',
+            background: 'radial-gradient(circle, rgba(255,220,130,0.14) 0%, rgba(255,220,130,0) 70%)',
+            filter: 'blur(45px)',
+          }}
+        />
+      </div>
+
       {/* Floating idea bubbles area */}
       <div className="flex-1 relative overflow-hidden pt-14">
         {IDEAS.map((idea, i) => {
@@ -88,22 +124,19 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
           return (
             <motion.button
               key={i}
-              className="absolute max-w-[140px] px-3 py-2 rounded-2xl text-[11px] leading-snug text-left"
+              className="absolute max-w-[160px] px-3 py-2 rounded-2xl text-[11px] leading-snug text-left text-slate-700"
               style={{
                 left: `${layout.x}%`,
                 top: `${layout.y}%`,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%)',
-                backdropFilter: 'blur(20px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                border: '1px solid rgba(255,255,255,0.45)',
-                boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.6), 0 4px 16px rgba(0,0,0,0.06)',
-                color: 'rgba(0,0,0,0.5)',
+                background: 'rgba(255,255,255,0.6)',
+                border: '1px solid rgba(255,255,255,0.7)',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               }}
               onClick={() => onBubbleClick(idea)}
               whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{
-                opacity: [0.45, 0.75, 0.45],
+                opacity: [0.6, 0.9, 0.6],
                 x: [0, layout.dx, 0],
                 y: [0, layout.dy, 0],
               }}
@@ -119,16 +152,14 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
         })}
       </div>
 
-      {/* Input box – positioned above nav bar */}
-      <div className="px-4 pb-[calc(env(safe-area-inset-bottom,0px)+24px+56px+16px)]">
+      {/* Input box – flat, minimal shadow */}
+      <div className="relative z-10 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+24px+56px+16px)]">
         <div
           className="w-full rounded-2xl px-3 py-2.5 flex flex-col gap-2"
           style={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.3) 100%)',
-            backdropFilter: 'blur(40px) saturate(200%)',
-            WebkitBackdropFilter: 'blur(40px) saturate(200%)',
-            border: '1px solid rgba(255,255,255,0.5)',
-            boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.6), inset 0 -1px 2px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
+            background: 'rgba(255,255,255,0.7)',
+            border: '1px solid rgba(0,0,0,0.06)',
+            boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
           }}
         >
           <textarea
@@ -184,20 +215,11 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
                 onClick={onSend}
                 whileTap={{ scale: 0.9 }}
                 style={{
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.35) 100%)',
-                  backdropFilter: 'blur(40px) saturate(200%)',
-                  WebkitBackdropFilter: 'blur(40px) saturate(200%)',
-                  border: '1px solid rgba(255,255,255,0.6)',
-                  boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.7), inset 0 -1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.08)',
+                  background: 'rgba(255,255,255,0.65)',
+                  border: '1px solid rgba(0,0,0,0.06)',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
                 }}
               >
-                <div
-                  className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[45%] rounded-full pointer-events-none"
-                  style={{
-                    background: 'linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 100%)',
-                    filter: 'blur(1px)',
-                  }}
-                />
                 <Send size={14} className="text-foreground relative z-10" />
               </motion.button>
             )}
