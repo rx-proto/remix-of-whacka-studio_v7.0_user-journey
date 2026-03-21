@@ -32,7 +32,7 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
               {activeTab === tab.index && (
                 <motion.div
                   layoutId="tab-highlight"
-                  className="absolute inset-1 rounded-full"
+                  className="absolute left-1 right-1 top-0.5 bottom-0.5 rounded-full"
                   style={{
                     background: 'rgba(255,255,255,0.55)',
                     boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.8), 0 1px 3px rgba(0,0,0,0.06)',

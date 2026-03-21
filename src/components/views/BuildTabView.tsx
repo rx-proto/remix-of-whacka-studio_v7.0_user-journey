@@ -174,7 +174,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
           <textarea
             value={inputText}
             onChange={(e) => onInputChange(e.target.value)}
-            placeholder="Describe your app idea..."
+            placeholder="Describe your app idea...（这里idea bubble位置不变，输入框靠近bubble下方，而不是现在这种太低了的，但我调不了）"
             className="w-full bg-transparent text-foreground placeholder:text-muted-foreground/50 outline-none text-sm min-w-0 resize-none leading-relaxed"
             style={{ minHeight: '3.5rem' }}
             rows={2}
