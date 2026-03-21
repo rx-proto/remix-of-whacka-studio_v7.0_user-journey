@@ -70,6 +70,7 @@ interface FloatingAssistantProps {
   sidebarOpen?: boolean;
   isLoggedIn?: boolean;
   onRequireAuth?: () => void;
+  homeGateActive?: boolean;
 }
 
 const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView, onViewChange, appName: externalAppName, appDesc: externalAppDesc, mainTab = 0, onMainTabChange, isPanelOpen = false, onPanelOpenChange, panelType = 'preview', hideTabBar = false, sidebarOpen = false, isLoggedIn = true, onRequireAuth }) => {
