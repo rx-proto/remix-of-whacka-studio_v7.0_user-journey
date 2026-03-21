@@ -127,7 +127,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
       </div>
 
       {/* Floating idea bubbles area */}
-      <div className="flex-1 relative overflow-hidden pt-14">
+      <div className="relative overflow-hidden pt-14" style={{ height: '55vh' }}>
         {IDEAS.map((idea, i) => {
           const layout = BUBBLE_LAYOUT[i];
           return (
@@ -185,16 +185,17 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
 
           <div className="flex items-center justify-between">
             {/* Free credits indicator */}
-            <div className="flex items-center gap-2">
-              <div className="w-[48px] h-[4px] rounded-full bg-slate-200 overflow-hidden">
-                <div className="h-full rounded-full" style={{ width: `${(13 / 15) * 100}%`, background: '#F97316' }} />
-              </div>
-              <span className="text-[11px] text-muted-foreground">Free credits 13/15</span>
+            <div className="flex items-center gap-1.5">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M11.051 7.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.867l-1.156-1.152a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"/>
+              </svg>
+              <span className="text-[11px] text-slate-900">Free credits <span style={{ color: '#F97316' }}>13</span>/15</span>
             </div>
 
             <div className="flex items-center gap-1.5">
               <motion.button
-                className="p-1.5 rounded-full text-muted-foreground flex items-center justify-center flex-shrink-0"
+                className="p-1.5 rounded-full text-slate-900 flex items-center justify-center flex-shrink-0"
                 style={{ minHeight: 32, minWidth: 32 }}
                 whileTap={{ scale: 0.9 }}
                 onMouseDown={onMicPressStart}
