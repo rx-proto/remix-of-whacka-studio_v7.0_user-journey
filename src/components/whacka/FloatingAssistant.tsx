@@ -11,6 +11,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import VoiceWave from './VoiceWave';
 import BottomTabBar from './BottomTabBar';
 import CreatePanel from './CreatePanel';
+import BuildTabView from '../views/BuildTabView';
 import type { AppView } from '../../pages/Index';
 
 /* Hand-drawn star SVG - matches BottomTabBar */
