@@ -74,11 +74,11 @@ const Index = () => {
   }, [isLight]);
 
   const handleTabChange = (tab: number) => {
-    // Gate Home tab (index 0) when not logged in
     if (tab === 0 && !isLoggedIn) {
-      navigate('/auth');
+      setShowHomeGate(true);
       return;
     }
+    setShowHomeGate(false);
     setPrevTab(mainTab);
     setMainTab(tab);
   };
