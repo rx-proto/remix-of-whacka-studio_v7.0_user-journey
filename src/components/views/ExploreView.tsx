@@ -239,7 +239,7 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
 
                 {/* Title */}
                 <h2 className="text-xl font-bold text-slate-900 text-center leading-snug">
-                  Add to Home Screen
+                  You can always add Whacka to your phone's home screen
                 </h2>
 
                 {/* Instructions */}

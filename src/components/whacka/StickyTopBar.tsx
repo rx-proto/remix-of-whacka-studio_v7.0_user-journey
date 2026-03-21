@@ -50,7 +50,7 @@ const StickyTopBar: React.FC<StickyTopBarProps> = ({
           </button>
           <div className="flex items-center gap-1">
             <button onClick={onOpenTip} className="flex items-center justify-center min-h-[44px] min-w-[44px]">
-              <Lightbulb size={20} className="text-slate-900" />
+              <Lightbulb size={20} className="text-slate-400" />
             </button>
             <button onClick={onOpenNotifications} className="flex items-center justify-center min-h-[44px] min-w-[44px] relative">
               <Search size={20} className="text-slate-900" />
