@@ -76,7 +76,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
           Whacka lets you add any app to your phone's home screen and use it <span style={{ color: '#F97316', fontWeight: 600 }}>like a native app</span>. You can always find the instructions here.
         </p>
       ),
-      spotlight: { cx: 310, cy: 38, r: 28 },
+      spotlight: { cx: 305, cy: 38, r: 28 },
       textPosition: 'below-top',
       showDots: true,
       dotIndex: 3,
@@ -85,17 +85,27 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     {
       content: (
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[22px] font-bold text-slate-800">Have fun in</span>
-          <span
-            style={{
-              fontFamily: "'Pacifico', cursive",
-              fontSize: '28px',
-              color: '#F97316',
-              lineHeight: 1.3,
-            }}
-          >
-            Whacka
+          <span className="text-[22px] font-bold text-slate-800">
+            Have fun in{' '}
+            <span
+              style={{
+                fontFamily: "'Pacifico', cursive",
+                fontSize: '22px',
+                color: '#F97316',
+                fontWeight: 400,
+              }}
+            >
+              Whacka
+            </span>
           </span>
+          <button
+            onClick={() => {}}
+            className="mt-4 px-8 py-2.5 rounded-full text-white font-semibold text-[15px]"
+            style={{ backgroundColor: '#F97316' }}
+            data-dismiss="true"
+          >
+            Yes I will!
+          </button>
         </div>
       ),
       textPosition: 'center',
