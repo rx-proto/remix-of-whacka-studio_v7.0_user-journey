@@ -73,7 +73,7 @@ interface FloatingAssistantProps {
   homeGateActive?: boolean;
 }
 
-const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView, onViewChange, appName: externalAppName, appDesc: externalAppDesc, mainTab = 0, onMainTabChange, isPanelOpen = false, onPanelOpenChange, panelType = 'preview', hideTabBar = false, sidebarOpen = false, isLoggedIn = true, onRequireAuth }) => {
+const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView, onViewChange, appName: externalAppName, appDesc: externalAppDesc, mainTab = 0, onMainTabChange, isPanelOpen = false, onPanelOpenChange, panelType = 'preview', hideTabBar = false, sidebarOpen = false, isLoggedIn = true, onRequireAuth, homeGateActive = false }) => {
   const prevMainTabRef = useRef(mainTab);
   useEffect(() => {
     prevMainTabRef.current = mainTab;
