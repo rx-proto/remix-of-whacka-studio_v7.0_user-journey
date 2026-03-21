@@ -49,7 +49,7 @@ const generateBubbleLayout = (count: number) => {
   for (let i = 0; i < count; i++) {
     const col = i % cols;
     const row = Math.floor(i / cols);
-    const baseX = 6 + col * cellW;
+    const baseX = 2 + col * cellW;
     const baseY = startY + row * cellH;
     bubbles.push({
       x: baseX + rand() * (cellW * 0.3),
