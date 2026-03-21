@@ -198,6 +198,7 @@ const Index = () => {
           onOpenMenu={() => setShowProfile(true)}
           initialPlaylist={initialPlaylist}
           onPlaylistConsumed={() => setInitialPlaylist(undefined)}
+          onTestOnboarding={() => setShowOnboarding(true)}
         />
       ),
     },
