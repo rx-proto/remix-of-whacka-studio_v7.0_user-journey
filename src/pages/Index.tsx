@@ -54,6 +54,7 @@ const Index = () => {
   const [notifInitialTab, setNotifInitialTab] = useState<string>('All');
   const [profileAuthor, setProfileAuthor] = useState<string>('');
   const [initialPlaylist, setInitialPlaylist] = useState<string | undefined>(undefined);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const handleOpenUser = (authorName: string) => {
     setProfileAuthor(authorName);
