@@ -31,8 +31,8 @@ interface BuildTabViewProps {
 const generateBubbleLayout = (count: number) => {
   const cols = 2;
   const rows = Math.ceil(count / cols);
-  const cellW = 88 / cols;
-  const cellH = 75 / rows;
+  const cellW = 80 / cols;
+  const cellH = 82 / rows;
 
   const rng = (seed: number) => {
     let s = seed;
@@ -45,11 +45,11 @@ const generateBubbleLayout = (count: number) => {
   for (let i = 0; i < count; i++) {
     const col = i % cols;
     const row = Math.floor(i / cols);
-    const baseX = 4 + col * cellW;
-    const baseY = 2 + row * cellH;
+    const baseX = 6 + col * cellW;
+    const baseY = 3 + row * cellH;
     bubbles.push({
-      x: baseX + rand() * (cellW * 0.35),
-      y: baseY + rand() * (cellH * 0.3),
+      x: baseX + rand() * (cellW * 0.3),
+      y: baseY + rand() * (cellH * 0.2),
       delay: rand() * 4,
       duration: 4 + rand() * 3,
       dx: (rand() - 0.5) * 6,
