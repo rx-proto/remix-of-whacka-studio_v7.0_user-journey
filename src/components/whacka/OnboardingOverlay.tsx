@@ -49,6 +49,7 @@ const STORAGE_KEY = 'whacka-onboarding-done';
 
 interface OnboardingOverlayProps {
   forceShow?: boolean;
+  onDone?: () => void;
 }
 
 const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow }) => {
