@@ -52,7 +52,7 @@ interface OnboardingOverlayProps {
   onDone?: () => void;
 }
 
-const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow }) => {
+const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone }) => {
   const [step, setStep] = useState(0);
   const [visible, setVisible] = useState(false);
 
