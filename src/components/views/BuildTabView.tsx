@@ -246,8 +246,6 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
           </div>
         </div>
       </div>
-      {/* Bottom spacer for tab bar */}
-      <div className="h-[calc(env(safe-area-inset-bottom,0px)+56px+16px)]" />
     </div>
   );
 };
