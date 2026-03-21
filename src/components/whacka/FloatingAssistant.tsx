@@ -104,6 +104,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
   const [isBuilding, setIsBuilding] = useState(false);
   const [buildPhase, setBuildPhase] = useState(0);
   const [buildComplete, setBuildComplete] = useState(false);
+  const [showAutoSaveTip, setShowAutoSaveTip] = useState(false);
   const [showVoiceIndicator, setShowVoiceIndicator] = useState(false);
   const [voiceText, setVoiceText] = useState('');
   const [ideaIndex, setIdeaIndex] = useState(0);
