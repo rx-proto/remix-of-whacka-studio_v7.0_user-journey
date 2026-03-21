@@ -62,15 +62,18 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     if (!done) setVisible(true);
   }, [forceShow]);
 
-  const handleNext = () => {
-    if (step < STEPS.length - 1) setStep(step + 1);
-    else { setVisible(false); localStorage.setItem(STORAGE_KEY, 'true'); }
-  };
-
-  const handleSkip = () => {
+  const dismiss = () => {
     setVisible(false);
     localStorage.setItem(STORAGE_KEY, 'true');
+    onDone?.();
   };
+
+  const handleNext = () => {
+    if (step < STEPS.length - 1) setStep(step + 1);
+    else dismiss();
+  };
+
+  const handleSkip = () => dismiss();
 
   if (!visible) return null;
 
