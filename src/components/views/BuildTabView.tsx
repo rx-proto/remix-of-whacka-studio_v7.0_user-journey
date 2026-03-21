@@ -12,13 +12,7 @@ const IDEAS = [
   'Make a plant care reminder app',
   'Build a movie night picker',
   'Design a micro-journal app',
-  'Create a walk art tracker',
-  'Build language flashcards',
-  'Make a birthday countdown app',
   'Create a mood playlist generator',
-  'Build a travel bucket list',
-  'Design a daily sketch challenge',
-  'Make a gratitude jar app',
 ];
 
 interface BuildTabViewProps {
@@ -37,8 +31,8 @@ interface BuildTabViewProps {
 const generateBubbleLayout = (count: number) => {
   const cols = 2;
   const rows = Math.ceil(count / cols);
-  const cellW = 88 / cols;
-  const cellH = 75 / rows;
+  const cellW = 80 / cols;
+  const cellH = 82 / rows;
 
   const rng = (seed: number) => {
     let s = seed;
@@ -51,11 +45,11 @@ const generateBubbleLayout = (count: number) => {
   for (let i = 0; i < count; i++) {
     const col = i % cols;
     const row = Math.floor(i / cols);
-    const baseX = 4 + col * cellW;
-    const baseY = 2 + row * cellH;
+    const baseX = 6 + col * cellW;
+    const baseY = 3 + row * cellH;
     bubbles.push({
-      x: baseX + rand() * (cellW * 0.35),
-      y: baseY + rand() * (cellH * 0.3),
+      x: baseX + rand() * (cellW * 0.3),
+      y: baseY + rand() * (cellH * 0.2),
       delay: rand() * 4,
       duration: 4 + rand() * 3,
       dx: (rand() - 0.5) * 6,
@@ -85,34 +79,45 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
         <div
           className="absolute rounded-full"
           style={{
-            width: '70vw',
-            height: '70vw',
-            left: '15%',
-            bottom: '18%',
-            background: 'radial-gradient(circle, rgba(255,127,110,0.18) 0%, rgba(255,127,110,0) 70%)',
-            filter: 'blur(40px)',
-          }}
-        />
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: '60vw',
-            height: '60vw',
-            left: '30%',
-            bottom: '25%',
-            background: 'radial-gradient(circle, rgba(255,160,90,0.15) 0%, rgba(255,160,90,0) 70%)',
+            width: '90vw',
+            height: '90vw',
+            left: '5%',
+            top: '5%',
+            background: 'radial-gradient(circle, rgba(255,200,160,0.13) 0%, rgba(255,200,160,0) 70%)',
             filter: 'blur(50px)',
           }}
         />
         <div
           className="absolute rounded-full"
           style={{
-            width: '55vw',
-            height: '55vw',
+            width: '100vw',
+            height: '100vw',
+            left: '0%',
+            top: '15%',
+            background: 'radial-gradient(circle, rgba(255,127,110,0.18) 0%, rgba(255,127,110,0) 65%)',
+            filter: 'blur(50px)',
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: '85vw',
+            height: '85vw',
             left: '20%',
-            bottom: '30%',
-            background: 'radial-gradient(circle, rgba(255,220,130,0.14) 0%, rgba(255,220,130,0) 70%)',
-            filter: 'blur(45px)',
+            top: '25%',
+            background: 'radial-gradient(circle, rgba(255,160,90,0.16) 0%, rgba(255,160,90,0) 65%)',
+            filter: 'blur(60px)',
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: '80vw',
+            height: '80vw',
+            left: '10%',
+            top: '40%',
+            background: 'radial-gradient(circle, rgba(255,220,130,0.15) 0%, rgba(255,220,130,0) 65%)',
+            filter: 'blur(50px)',
           }}
         />
       </div>
