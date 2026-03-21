@@ -286,8 +286,7 @@ const Index = () => {
                 className="w-full max-w-[280px] px-6 py-3 rounded-full text-sm font-semibold text-white bg-slate-800 active:bg-slate-700 min-h-[44px] flex items-center justify-center gap-1.5"
                 whileTap={{ scale: 0.96 }}
               >
-                Sign in with{' '}
-                <span style={{ fontFamily: "'Pacifico', cursive", fontWeight: 400, fontSize: '15px' }}>Whacka</span>
+                Sign in with email
               </motion.button>
 
               {/* Expandable email/password fields */}
@@ -349,7 +348,7 @@ const Index = () => {
               <p className="text-[13px] text-slate-500 mt-1">
                 Don't have an account?{' '}
                 <button
-                  onClick={() => { setShowHomeGate(false); setGateExpanded(false); navigate('/auth'); }}
+                  onClick={() => { setShowHomeGate(false); setGateExpanded(false); navigate('/auth?mode=register'); }}
                   className="text-slate-800 font-semibold underline underline-offset-2"
                 >
                   Sign up now

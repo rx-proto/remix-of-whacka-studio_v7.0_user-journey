@@ -45,9 +45,11 @@ const OnboardingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F9FAFB] flex flex-col">
       {/* Aurora */}
-      <div className="absolute inset-x-0 top-0 h-[300px] overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-8 w-52 h-52 rounded-full bg-violet-300/20 blur-2xl" />
-        <div className="absolute top-20 right-6 w-44 h-44 rounded-full bg-sky-200/25 blur-2xl" />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute rounded-full" style={{ width: '90vw', height: '90vw', left: '5%', top: '5%', background: 'radial-gradient(circle, rgba(255,200,160,0.13) 0%, rgba(255,200,160,0) 70%)', filter: 'blur(50px)' }} />
+        <div className="absolute rounded-full" style={{ width: '100vw', height: '100vw', left: '0%', top: '15%', background: 'radial-gradient(circle, rgba(255,127,110,0.18) 0%, rgba(255,127,110,0) 65%)', filter: 'blur(50px)' }} />
+        <div className="absolute rounded-full" style={{ width: '85vw', height: '85vw', left: '20%', top: '25%', background: 'radial-gradient(circle, rgba(255,160,90,0.16) 0%, rgba(255,160,90,0) 65%)', filter: 'blur(60px)' }} />
+        <div className="absolute rounded-full" style={{ width: '80vw', height: '80vw', left: '10%', top: '40%', background: 'radial-gradient(circle, rgba(255,220,130,0.15) 0%, rgba(255,220,130,0) 65%)', filter: 'blur(50px)' }} />
       </div>
 
       <div className="relative z-10 flex-1 flex flex-col justify-center px-8 max-w-sm mx-auto w-full">

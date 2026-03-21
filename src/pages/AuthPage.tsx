@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
 
@@ -82,7 +82,8 @@ const WhackaHandwritten = () => {
 };
 
 const AuthPage: React.FC = () => {
-  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [searchParams] = useSearchParams();
+  const [mode, setMode] = useState<'login' | 'register'>(searchParams.get('mode') === 'register' ? 'register' : 'login');
   const [email, setEmail] = useState('yang@whacka.com');
   const [password, setPassword] = useState('123456');
   const [confirmPassword, setConfirmPassword] = useState('');
