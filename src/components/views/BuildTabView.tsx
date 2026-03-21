@@ -127,7 +127,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
       </div>
 
       {/* Floating idea bubbles area */}
-      <div className="relative overflow-hidden pt-14" style={{ height: '55vh' }}>
+      <div className="flex-1 relative overflow-hidden pt-14">
         {IDEAS.map((idea, i) => {
           const layout = BUBBLE_LAYOUT[i];
           return (
