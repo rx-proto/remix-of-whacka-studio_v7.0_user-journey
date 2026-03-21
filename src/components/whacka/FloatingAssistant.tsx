@@ -317,6 +317,11 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
     onPanelOpenChange?.(newVal);
   };
 
+  // Visual order: Home(0)=0, Build(2)=1, Explore(1)=2
+  const TAB_POS: Record<number, number> = { 0: 0, 1: 2, 2: 1 };
+  const prevPos = TAB_POS[prevMainTabRef.current] ?? prevMainTabRef.current;
+  const buildSlideX = prevPos < 1 ? '100%' : '-100%';
+
   return (
     <>
       {/* ===== BOTTOM TAB BAR (explore/home views only) ===== */}
@@ -334,15 +339,14 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
       )}
 
       {/* ===== BUILD TAB VIEW (inline, when tab 2 is active) ===== */}
-      <AnimatePresence mode="wait" custom={buildSlideDir}>
+      <AnimatePresence mode="wait">
         {appView === 'explore' && mainTab === 2 && (
           <motion.div
             key="build-tab-view"
             className="fixed inset-0 z-30 bg-[#F9FAFB]"
-            custom={buildSlideDir}
-            initial={(dir: number) => ({ x: `${dir * 100}%`, opacity: 0 })}
+            initial={{ x: buildSlideX, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={(dir: number) => ({ x: `${dir * 100}%`, opacity: 0 })}
+            exit={{ x: buildSlideX, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             <BuildTabView
