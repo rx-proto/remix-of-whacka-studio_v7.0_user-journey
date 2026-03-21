@@ -621,6 +621,32 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                     </motion.div>
                   )}
                 </AnimatePresence>
+                {/* Auto-save tip after first build */}
+                <AnimatePresence>
+                  {showAutoSaveTip && !isBuilding && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.25 }}
+                      className="mb-2 rounded-xl px-3 py-2.5 flex items-start gap-2"
+                      style={{
+                        background: 'rgba(255,255,255,0.75)',
+                        border: '1px solid rgba(0,0,0,0.06)',
+                        boxShadow: '0 1px 8px rgba(0,0,0,0.05)',
+                      }}
+                    >
+                      <p className="text-[12px] text-slate-700 leading-snug flex-1">
+                        Your app is auto saved & published. Share or add to phone screen through{' '}
+                        <Share size={11} className="inline-block text-slate-500 -mt-0.5" />{' '}
+                        anytime!
+                      </p>
+                      <button onClick={() => setShowAutoSaveTip(false)} className="text-slate-400 flex-shrink-0 mt-0.5">
+                        <X size={13} />
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 {/* Quoted message indicator */}
                 <AnimatePresence>
                   {quotedMsg && (
