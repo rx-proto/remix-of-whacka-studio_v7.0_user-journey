@@ -82,7 +82,8 @@ const WhackaHandwritten = () => {
 };
 
 const AuthPage: React.FC = () => {
-  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [searchParams] = useSearchParams();
+  const [mode, setMode] = useState<'login' | 'register'>(searchParams.get('mode') === 'register' ? 'register' : 'login');
   const [email, setEmail] = useState('yang@whacka.com');
   const [password, setPassword] = useState('123456');
   const [confirmPassword, setConfirmPassword] = useState('');
