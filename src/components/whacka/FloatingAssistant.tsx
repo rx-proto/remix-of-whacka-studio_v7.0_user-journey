@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Send, Paperclip, Mic, MessageSquare, MessageCircle, Clock,
-  Check, Loader2, Volume2, Copy, Share2, ImagePlus, Pencil, RefreshCw, Quote
+  Check, Loader2, Volume2, Copy, Share2, ImagePlus, Pencil, RefreshCw, Quote, Share, X
 } from 'lucide-react';
 import WhackaLogo from './WhackaLogo';
 import DetailsPanelContent from '../views/DetailsPanelContent';
@@ -104,6 +104,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
   const [isBuilding, setIsBuilding] = useState(false);
   const [buildPhase, setBuildPhase] = useState(0);
   const [buildComplete, setBuildComplete] = useState(false);
+  const [showAutoSaveTip, setShowAutoSaveTip] = useState(false);
   const [showVoiceIndicator, setShowVoiceIndicator] = useState(false);
   const [voiceText, setVoiceText] = useState('');
   const [ideaIndex, setIdeaIndex] = useState(0);
@@ -169,6 +170,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
           setTimeout(() => {
             setIsBuilding(false);
             setBuildComplete(true);
+            setShowAutoSaveTip(true);
             setMessages(prev => [...prev, {
               role: 'assistant',
               content: 'Your app is ready! 🎉 The preview has been updated.',
@@ -616,6 +618,32 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                     >
                       <Loader2 size={12} className="animate-spin text-primary" />
                       <span className="text-muted-foreground">{thinkingSteps[buildPhase]}</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                {/* Auto-save tip after first build */}
+                <AnimatePresence>
+                  {showAutoSaveTip && !isBuilding && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.25 }}
+                      className="mb-2 rounded-xl px-3 py-2.5 flex items-start gap-2"
+                      style={{
+                        background: 'rgba(255,255,255,0.75)',
+                        border: '1px solid rgba(0,0,0,0.06)',
+                        boxShadow: '0 1px 8px rgba(0,0,0,0.05)',
+                      }}
+                    >
+                      <p className="text-[12px] text-slate-700 leading-snug flex-1">
+                        Your app is auto saved & published. Share or add to phone screen through{' '}
+                        <Share size={11} className="inline-block text-slate-500 -mt-0.5" />{' '}
+                        anytime!
+                      </p>
+                      <button onClick={() => setShowAutoSaveTip(false)} className="text-slate-400 flex-shrink-0 mt-0.5">
+                        <X size={13} />
+                      </button>
                     </motion.div>
                   )}
                 </AnimatePresence>
