@@ -52,12 +52,13 @@ const generateBubbleLayout = (count: number) => {
     const baseX = 2 + col * cellW;
     const baseY = startY + row * cellH;
     bubbles.push({
-      x: baseX + rand() * (cellW * 0.3),
+      x: baseX + rand() * (cellW * 0.2),
       y: baseY + rand() * (cellH * 0.2),
       delay: rand() * 4,
       duration: 4 + rand() * 3,
       dx: (rand() - 0.5) * 6,
       dy: (rand() - 0.5) * 5,
+      bgAlpha: i % 3 === 0 ? 0.35 : i % 3 === 1 ? 0.5 : 0.65,
     });
   }
   return bubbles;
