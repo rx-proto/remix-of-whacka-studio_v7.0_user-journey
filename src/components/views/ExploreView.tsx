@@ -84,6 +84,7 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onOpenApp, onOpenPlaylist, on
           onOpenMenu={onOpenMenu}
           onOpenNotifications={onOpenNotifications}
           onOpenTip={() => setShowTipDrawer(true)}
+          onTestOnboarding={onTestOnboarding}
           showNotification={isLoggedIn}
         />
 
