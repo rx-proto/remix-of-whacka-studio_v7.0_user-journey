@@ -301,7 +301,7 @@ const Index = () => {
                       custom={slideDir.current}
                       className="absolute inset-0 overflow-y-auto"
                       variants={tabVariants}
-                      initial="enter"
+                      initial={prevTab === 2 ? false : 'enter'}
                       animate="center"
                       exit="exit"
                       transition={{ type: 'spring', stiffness: 300, damping: 30 }}

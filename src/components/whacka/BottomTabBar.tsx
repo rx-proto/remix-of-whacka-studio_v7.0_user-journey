@@ -14,10 +14,9 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
   activeTab,
   onTabChange,
 }) => {
-  // Visual order: Home(0), Build(2), Explore(1)
   const tabs = [
     { index: 0, icon: Home, label: 'Home', iconSize: 18, filledIcon: HomeFilled },
-    { index: 2, icon: Sparkle, label: 'Build', iconSize: 19, filledIcon: SparkleFilledIcon },
+    { index: 2, icon: Sparkle, label: 'Create', iconSize: 19, filledIcon: SparkleFilledIcon },
     { index: 1, icon: Compass, label: 'Explore', iconSize: 20, filledIcon: CompassFilled },
   ];
 
@@ -30,7 +29,6 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
         <div className="flex items-center w-full p-1 relative" style={{ height: BAR_HEIGHT }}>
           {tabs.map((tab) => (
             <div key={tab.index} className="flex-1 flex justify-center relative" style={{ minWidth: 0 }}>
-              {/* Active tab white highlight background */}
               {activeTab === tab.index && (
                 <motion.div
                   layoutId="tab-highlight"
