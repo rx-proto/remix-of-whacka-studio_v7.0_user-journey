@@ -161,8 +161,8 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
         })}
       </div>
 
-      {/* Input box – flat, minimal shadow */}
-      <div className="relative z-10 px-4 pb-[calc(env(safe-area-inset-bottom,0px)+24px+56px+16px)]">
+      {/* Input box – flat, minimal shadow, moved up */}
+      <div className="relative z-10 px-4 pb-4 mt-2">
         <div
           className="w-full rounded-2xl px-3 py-2.5 flex flex-col gap-2"
           style={{
@@ -183,58 +183,70 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
             disabled={isBuilding}
           />
 
-          <div className="flex items-center justify-end gap-1.5">
-            <motion.button
-              className="p-1.5 rounded-full text-muted-foreground flex items-center justify-center flex-shrink-0"
-              style={{ minHeight: 32, minWidth: 32 }}
-              whileTap={{ scale: 0.9 }}
-              onMouseDown={onMicPressStart}
-              onMouseUp={onMicPressEnd}
-              onMouseLeave={onMicPressCancel}
-              onTouchStart={onMicPressStart}
-              onTouchEnd={(e) => { e.preventDefault(); onMicPressEnd(); }}
-              onTouchCancel={onMicPressCancel}
-            >
-              <Mic size={18} />
-            </motion.button>
+          <div className="flex items-center justify-between">
+            {/* Free credits indicator */}
+            <div className="flex items-center gap-2">
+              <div className="w-[48px] h-[4px] rounded-full bg-slate-200 overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: `${(13 / 15) * 100}%`, background: '#F97316' }} />
+              </div>
+              <span className="text-[11px] text-muted-foreground">Free credits 13/15</span>
+            </div>
 
-            {isBuilding ? (
+            <div className="flex items-center gap-1.5">
               <motion.button
-                onClick={onStopBuild}
-                className="relative w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                className="p-1.5 rounded-full text-muted-foreground flex items-center justify-center flex-shrink-0"
+                style={{ minHeight: 32, minWidth: 32 }}
                 whileTap={{ scale: 0.9 }}
+                onMouseDown={onMicPressStart}
+                onMouseUp={onMicPressEnd}
+                onMouseLeave={onMicPressCancel}
+                onTouchStart={onMicPressStart}
+                onTouchEnd={(e) => { e.preventDefault(); onMicPressEnd(); }}
+                onTouchCancel={onMicPressCancel}
               >
-                <motion.svg className="absolute inset-0" width="36" height="36" viewBox="0 0 36 36">
-                  <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(139,92,246,0.2)" strokeWidth="2" />
-                  <motion.circle
-                    cx="18" cy="18" r="16" fill="none" stroke="hsl(var(--primary))" strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeDasharray="100"
-                    strokeDashoffset="75"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                    style={{ transformOrigin: 'center' }}
-                  />
-                </motion.svg>
-                <Square size={12} className="text-primary relative z-10" fill="currentColor" />
+                <Mic size={18} />
               </motion.button>
-            ) : (
-              <motion.button
-                className="relative w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden"
-                onClick={onSend}
-                whileTap={{ scale: 0.9 }}
-                style={{
-                  background: 'rgba(255,255,255,0.65)',
-                  border: '1px solid rgba(0,0,0,0.06)',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                }}
-              >
-                <Send size={14} className="text-foreground relative z-10" />
-              </motion.button>
-            )}
+
+              {isBuilding ? (
+                <motion.button
+                  onClick={onStopBuild}
+                  className="relative w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <motion.svg className="absolute inset-0" width="36" height="36" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(139,92,246,0.2)" strokeWidth="2" />
+                    <motion.circle
+                      cx="18" cy="18" r="16" fill="none" stroke="hsl(var(--primary))" strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeDasharray="100"
+                      strokeDashoffset="75"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+                      style={{ transformOrigin: 'center' }}
+                    />
+                  </motion.svg>
+                  <Square size={12} className="text-primary relative z-10" fill="currentColor" />
+                </motion.button>
+              ) : (
+                <motion.button
+                  className="relative w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden"
+                  onClick={onSend}
+                  whileTap={{ scale: 0.9 }}
+                  style={{
+                    background: 'rgba(255,255,255,0.65)',
+                    border: '1px solid rgba(0,0,0,0.06)',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                  }}
+                >
+                  <Send size={14} className="text-foreground relative z-10" />
+                </motion.button>
+              )}
+            </div>
           </div>
         </div>
       </div>
+      {/* Bottom spacer for tab bar */}
+      <div className="h-[calc(env(safe-area-inset-bottom,0px)+56px+16px)]" />
     </div>
   );
 };

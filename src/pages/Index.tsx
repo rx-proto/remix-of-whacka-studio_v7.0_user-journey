@@ -248,8 +248,10 @@ const Index = () => {
             transition={{ duration: 0.25 }}
           >
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              <div className="absolute top-1/4 left-1/3 w-48 h-48 rounded-full bg-amber-100/30 blur-3xl" />
-              <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-orange-100/25 blur-3xl" />
+              <div className="absolute rounded-full" style={{ width: '90vw', height: '90vw', left: '5%', top: '5%', background: 'radial-gradient(circle, rgba(255,200,160,0.13) 0%, rgba(255,200,160,0) 70%)', filter: 'blur(50px)' }} />
+              <div className="absolute rounded-full" style={{ width: '100vw', height: '100vw', left: '0%', top: '15%', background: 'radial-gradient(circle, rgba(255,127,110,0.18) 0%, rgba(255,127,110,0) 65%)', filter: 'blur(50px)' }} />
+              <div className="absolute rounded-full" style={{ width: '85vw', height: '85vw', left: '20%', top: '25%', background: 'radial-gradient(circle, rgba(255,160,90,0.16) 0%, rgba(255,160,90,0) 65%)', filter: 'blur(60px)' }} />
+              <div className="absolute rounded-full" style={{ width: '80vw', height: '80vw', left: '10%', top: '40%', background: 'radial-gradient(circle, rgba(255,220,130,0.15) 0%, rgba(255,220,130,0) 65%)', filter: 'blur(50px)' }} />
             </div>
             <div className="relative z-10 text-center px-8 flex flex-col items-center gap-6">
               <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-1.5">
