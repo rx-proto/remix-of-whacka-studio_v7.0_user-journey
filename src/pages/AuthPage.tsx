@@ -250,7 +250,7 @@ const AuthPage: React.FC = () => {
           ) : (
             <>
               Already have an account?{' '}
-              <button onClick={() => { setMode('login'); setError(''); }} className="text-slate-900 font-semibold">
+              <button onClick={() => { setFadeOut(true); setTimeout(() => navigate('/'), 400); }} className="text-slate-900 font-semibold">
                 Sign In
               </button>
             </>
