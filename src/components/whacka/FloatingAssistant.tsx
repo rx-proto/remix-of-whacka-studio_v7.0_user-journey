@@ -330,26 +330,29 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
       )}
 
       {/* ===== BUILD TAB VIEW (inline, when tab 2 is active) ===== */}
-      {appView === 'explore' && mainTab === 2 && (
-        <motion.div
-          className="fixed inset-0 z-30 bg-[#F9FAFB]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <BuildTabView
-            inputText={capsuleText}
-            onInputChange={setCapsuleText}
-            onSend={handleCapsuleSend}
-            onBubbleClick={(text) => setCapsuleText(text)}
-            onMicPressStart={handleVoicePressStart}
-            onMicPressEnd={handleVoicePressEnd}
-            onMicPressCancel={handlePressCancel}
-            isBuilding={isBuilding}
-          />
-        </motion.div>
-      )}
+      <AnimatePresence mode="wait">
+        {appView === 'explore' && mainTab === 2 && (
+          <motion.div
+            key="build-tab-view"
+            className="fixed inset-0 z-30 bg-[#F9FAFB]"
+            initial={{ x: prevTabPos > 1 ? '-100%' : '100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: mainTab === 0 || (mainTab === 1 && true) ? '-100%' : '100%', opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            <BuildTabView
+              inputText={capsuleText}
+              onInputChange={setCapsuleText}
+              onSend={handleCapsuleSend}
+              onBubbleClick={(text) => setCapsuleText(text)}
+              onMicPressStart={handleVoicePressStart}
+              onMicPressEnd={handleVoicePressEnd}
+              onMicPressCancel={handlePressCancel}
+              isBuilding={isBuilding}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ===== DRAWER PANEL - portaled to body ===== */}
       {ReactDOM.createPortal(
