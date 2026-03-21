@@ -77,7 +77,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
   onStopBuild,
 }) => {
   return (
-    <div className="relative flex flex-col h-full overflow-hidden">
+    <div className="relative flex flex-col h-full overflow-hidden pb-[calc(env(safe-area-inset-bottom,0px)+56px+16px)]">
       {/* Warm gradient background blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -127,7 +127,7 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
       </div>
 
       {/* Floating idea bubbles area */}
-      <div className="relative overflow-hidden pt-14" style={{ height: '55vh' }}>
+      <div className="flex-1 relative overflow-hidden pt-14">
         {IDEAS.map((idea, i) => {
           const layout = BUBBLE_LAYOUT[i];
           return (
@@ -246,8 +246,6 @@ const BuildTabView: React.FC<BuildTabViewProps> = ({
           </div>
         </div>
       </div>
-      {/* Bottom spacer for tab bar */}
-      <div className="h-[calc(env(safe-area-inset-bottom,0px)+56px+16px)]" />
     </div>
   );
 };
