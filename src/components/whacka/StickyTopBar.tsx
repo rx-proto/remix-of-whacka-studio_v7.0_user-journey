@@ -5,6 +5,7 @@ interface StickyTopBarProps {
   onOpenMenu?: () => void;
   onOpenNotifications?: () => void;
   onOpenTip?: () => void;
+  onTestOnboarding?: () => void;
   showNotification?: boolean;
   children?: React.ReactNode;
   threshold?: number;
