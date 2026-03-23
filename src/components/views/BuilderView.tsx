@@ -186,41 +186,6 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                     ))}
                   </div>
 
-                  {/* Estimated time + sample apps - always visible inside the card */}
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    transition={{ duration: 0.4, delay: 0.3 }}
-                    className="space-y-3 pt-3 border-t border-muted-foreground/10 overflow-hidden"
-                  >
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock size={14} className="text-amber-500 flex-shrink-0" />
-                      <span>预计需要 <strong className="text-foreground">60s</strong> 生成，先看看类似的应用？</span>
-                    </div>
-                    <div className="space-y-2">
-                      {sampleApps.map((app) => (
-                        <motion.button
-                          key={app.name}
-                          onClick={handleCardPreview}
-                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors"
-                          style={{
-                            background: 'hsl(0 0% 50% / 0.08)',
-                            border: '1px solid hsl(0 0% 100% / 0.06)',
-                          }}
-                          whileTap={{ scale: 0.97 }}
-                        >
-                          <div className="w-10 h-10 rounded-xl bg-muted/60 flex items-center justify-center text-xl flex-shrink-0">
-                            {app.emoji}
-                          </div>
-                          <div className="text-left flex-1 min-w-0">
-                            <p className="text-sm font-medium text-foreground truncate">{app.name}</p>
-                            <p className="text-xs text-muted-foreground truncate">{app.desc}</p>
-                          </div>
-                          <ExternalLink size={14} className="text-muted-foreground flex-shrink-0" />
-                        </motion.button>
-                      ))}
-                    </div>
-                  </motion.div>
                 </GlassCard>
               </div>
 
@@ -303,6 +268,38 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="rounded-[28px] border border-border/60 bg-background/90 px-5 py-4 shadow-[0_8px_24px_hsl(var(--foreground)/0.08)]"
+          >
+            <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
+              <Clock size={14} className="text-primary flex-shrink-0" />
+              <span>预计需要 <strong className="text-foreground">60s</strong> 生成</span>
+            </div>
+            <div className="space-y-2">
+              {sampleApps.map((app) => (
+                <motion.button
+                  key={app.name}
+                  onClick={handleCardPreview}
+                  className="w-full flex items-center gap-3 rounded-2xl bg-muted/40 px-3 py-2.5 text-left"
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-background text-xl">
+                    {app.emoji}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium text-foreground">{app.name}</p>
+                    <p className="truncate text-xs text-muted-foreground">{app.desc}</p>
+                  </div>
+                  <ExternalLink size={14} className="flex-shrink-0 text-muted-foreground" />
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+
           <div className="liquid-glass rounded-2xl p-3 space-y-2.5">
             <textarea
               placeholder="Ask for changes..."
