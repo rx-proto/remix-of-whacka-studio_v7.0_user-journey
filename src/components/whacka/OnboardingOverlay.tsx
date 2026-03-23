@@ -85,7 +85,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     {
       content: (
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[22px] font-bold text-slate-800">
+          <span className="text-[22px] font-bold text-white">
             Have fun in{' '}
             <span
               style={{
