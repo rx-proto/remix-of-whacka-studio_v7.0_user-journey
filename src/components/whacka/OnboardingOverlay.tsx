@@ -26,7 +26,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 0: Welcome — no dots, show "tap anywhere" hint
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           Welcome to Whacka! You can create your own apps here and explore apps made by others.
         </p>
       ),
