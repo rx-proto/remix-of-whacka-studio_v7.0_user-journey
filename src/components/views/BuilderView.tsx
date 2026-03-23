@@ -163,8 +163,12 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                   <GlassCard className="p-4 max-w-[85%] space-y-3">
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Loader2 size={14} className="animate-spin text-primary" />
-                        <span>Building your app...</span>
+                        {isBuilding ? (
+                          <Loader2 size={14} className="animate-spin text-primary" />
+                        ) : (
+                          <Check size={14} className="text-emerald-400" />
+                        )}
+                        <span>{isBuilding ? 'Building your app...' : 'Build complete'}</span>
                       </div>
                       {thinkingSteps.map((step, i) => (
                         <motion.div
