@@ -45,7 +45,6 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
             setIsBuilding(false);
             setShowWaiting(true);
             setTimeout(() => {
-              setShowWaiting(false);
               setIsReady(true);
             }, 3000);
           }, 800);
