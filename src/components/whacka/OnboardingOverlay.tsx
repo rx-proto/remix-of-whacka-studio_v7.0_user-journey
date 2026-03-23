@@ -48,7 +48,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 2: Create — dot 1
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           Create your app here. You get <span style={{ color: '#F97316', fontWeight: 600 }}>15 free credits daily</span> — earn bonus credits by creating and inviting friends.
         </p>
       ),
