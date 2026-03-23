@@ -237,6 +237,19 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
     setBuildPhase(0);
   };
 
+  const handleSampleAppClick = (app: { emoji: string; name: string; desc: string }) => {
+    setPreviewingApp(app);
+    setIsPanelOpen(false);
+    setShowReadyBanner(true);
+    setTimeout(() => setShowReadyBanner(false), 4000);
+  };
+
+  const handleBackFromPreview = () => {
+    setPreviewingApp(null);
+    setShowReadyBanner(false);
+    setIsPanelOpen(true);
+  };
+
   const handlePressStart = () => {
     isLongPress.current = false;
     longPressTimer.current = setTimeout(() => {
