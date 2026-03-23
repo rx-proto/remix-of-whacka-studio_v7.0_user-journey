@@ -28,7 +28,6 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
   const [mode, setMode] = useState(0);
   const [buildPhase, setBuildPhase] = useState(0);
   const [isBuilding, setIsBuilding] = useState(true);
-  const [showWaiting, setShowWaiting] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [showTip, setShowTip] = useState(true);
@@ -43,10 +42,7 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
         if (i === thinkingSteps.length - 1) {
           setTimeout(() => {
             setIsBuilding(false);
-            setShowWaiting(true);
-            setTimeout(() => {
-              setIsReady(true);
-            }, 3000);
+            setTimeout(() => setIsReady(true), 3000);
           }, 800);
         }
       }, (i + 1) * 1200));
@@ -157,54 +153,48 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                 </div>
               </div>
 
-              {/* AI Response - Building */}
-              {(isBuilding || showWaiting || isReady) && (
-                <div className="flex justify-start">
-                  <GlassCard className="p-4 max-w-[85%] space-y-3">
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        {isBuilding ? (
+              {/* AI Response - Building + sample apps inside */}
+              <div className="flex justify-start">
+                <GlassCard className="p-4 max-w-[85%] space-y-3">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      {isBuilding ? (
+                        <Loader2 size={14} className="animate-spin text-primary" />
+                      ) : (
+                        <Check size={14} className="text-emerald-400" />
+                      )}
+                      <span>{isBuilding ? 'Building your app...' : 'Build complete'}</span>
+                    </div>
+                    {thinkingSteps.map((step, i) => (
+                      <motion.div
+                        key={step}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: i <= buildPhase ? 1 : 0.3, x: 0 }}
+                        className="flex items-center gap-2 text-sm"
+                      >
+                        {i < buildPhase ? (
+                          <Check size={14} className="text-emerald-400" />
+                        ) : i === buildPhase ? (
                           <Loader2 size={14} className="animate-spin text-primary" />
                         ) : (
-                          <Check size={14} className="text-emerald-400" />
+                          <div className="w-3.5 h-3.5 rounded-full border border-muted-foreground/30" />
                         )}
-                        <span>{isBuilding ? 'Building your app...' : 'Build complete'}</span>
-                      </div>
-                      {thinkingSteps.map((step, i) => (
-                        <motion.div
-                          key={step}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: i <= buildPhase ? 1 : 0.3, x: 0 }}
-                          className="flex items-center gap-2 text-sm"
-                        >
-                          {i < buildPhase ? (
-                            <Check size={14} className="text-emerald-400" />
-                          ) : i === buildPhase ? (
-                            <Loader2 size={14} className="animate-spin text-primary" />
-                          ) : (
-                            <div className="w-3.5 h-3.5 rounded-full border border-muted-foreground/30" />
-                          )}
-                          <span className={i <= buildPhase ? 'text-foreground' : 'text-muted-foreground'}>
-                            {step}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </GlassCard>
-                </div>
-              )}
+                        <span className={i <= buildPhase ? 'text-foreground' : 'text-muted-foreground'}>
+                          {step}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
 
-              {/* Waiting card - after thinking, before ready */}
-              {!isBuilding && (
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="flex justify-start"
-                >
-                  <GlassCard className="p-4 max-w-[85%] space-y-4">
+                  {/* Estimated time + sample apps - always visible inside the card */}
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                    className="space-y-3 pt-3 border-t border-muted-foreground/10 overflow-hidden"
+                  >
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock size={14} className="text-amber-500" />
+                      <Clock size={14} className="text-amber-500 flex-shrink-0" />
                       <span>预计需要 <strong className="text-foreground">60s</strong> 生成，先看看类似的应用？</span>
                     </div>
                     <div className="space-y-2">
@@ -230,9 +220,9 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                         </motion.button>
                       ))}
                     </div>
-                  </GlassCard>
-                </motion.div>
-              )}
+                  </motion.div>
+                </GlassCard>
+              </div>
 
               {/* Ready message */}
               {isReady && (
