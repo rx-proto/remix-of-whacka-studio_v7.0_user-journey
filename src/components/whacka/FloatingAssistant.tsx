@@ -649,6 +649,41 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                     </motion.div>
                   )}
                 </AnimatePresence>
+                {/* Estimated time + sample apps card */}
+                {!isBuilding && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="mx-5 mb-2 rounded-2xl px-4 py-3"
+                    style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}
+                  >
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2.5">
+                      <Clock size={12} className="text-amber-500 flex-shrink-0" />
+                      <span>预计需要 <strong className="text-foreground">60s</strong> 生成，先看看类似的应用？</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      {[
+                        { emoji: '💰', name: '记账小能手', desc: '智能记录每一笔开支' },
+                        { emoji: '📊', name: '预算追踪器', desc: '可视化你的财务目标' },
+                      ].map((app) => (
+                        <button
+                          key={app.name}
+                          className="w-full flex items-center gap-2.5 rounded-xl bg-slate-50 px-3 py-2 text-left active:bg-slate-100 transition-colors"
+                        >
+                          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-white text-lg shadow-sm">
+                            {app.emoji}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-[13px] font-medium text-slate-800">{app.name}</p>
+                            <p className="truncate text-[11px] text-slate-400">{app.desc}</p>
+                          </div>
+                          <ExternalLink size={12} className="flex-shrink-0 text-slate-300" />
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
               <div className="flex-shrink-0 px-4 pb-[env(safe-area-inset-bottom,16px)] pt-2 border-t border-foreground/5">
                 {/* Building step carousel — one at a time */}
                 <AnimatePresence mode="wait">
