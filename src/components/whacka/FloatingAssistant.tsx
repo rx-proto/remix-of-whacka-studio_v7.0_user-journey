@@ -607,49 +607,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
               </motion.div>
             ) : activeTab === 'chat' ? (
               <>
-                {/* Bonus credits tip */}
-                <AnimatePresence>
-                  {showBonusTip && !isBuilding && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.25 }}
-                      className="mx-5 mb-2 rounded-full pl-5 pr-4 py-3 flex items-center gap-3"
-                      style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}
-                    >
-                      <p className="text-[12px] text-slate-800 leading-snug flex-1">
-                        10 messages reached! Daily creation bonus credits{' '}
-                        <span style={{ color: '#F97316', fontWeight: 600 }}>+5</span>{' '}
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block -mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M11.051 7.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.867l-1.156-1.152a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"/></svg>
-                      </p>
-                      <button onClick={() => setShowBonusTip(false)} className="text-slate-400 flex-shrink-0">
-                        <X size={14} />
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {showAutoSaveTip && !isBuilding && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.25 }}
-                      className="mx-5 mb-2 rounded-full pl-5 pr-4 py-3 flex items-center gap-3"
-                      style={{ background: '#1e293b' }}
-                    >
-                      
-                      <p className="text-[12px] text-white/90 leading-snug flex-1">
-                        Your app is auto saved & published. Share or add to phone screen through <Share size={10} className="inline-block text-white/60 -mt-0.5" /> anytime!
-                      </p>
-                      <button onClick={() => setShowAutoSaveTip(false)} className="text-white/50 flex-shrink-0">
-                        <X size={14} />
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                {/* Estimated time + sample apps card */}
+                {/* Estimated time + sample apps card - above notifications */}
                 {!isBuilding && (
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
@@ -684,6 +642,47 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                     </div>
                   </motion.div>
                 )}
+                {/* Bonus credits tip */}
+                <AnimatePresence>
+                  {showBonusTip && !isBuilding && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.25 }}
+                      className="mx-5 mb-2 rounded-full pl-5 pr-4 py-3 flex items-center gap-3"
+                      style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}
+                    >
+                      <p className="text-[12px] text-slate-800 leading-snug flex-1">
+                        10 messages reached! Daily creation bonus credits{' '}
+                        <span style={{ color: '#F97316', fontWeight: 600 }}>+5</span>{' '}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block -mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M11.051 7.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.867l-1.156-1.152a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"/></svg>
+                      </p>
+                      <button onClick={() => setShowBonusTip(false)} className="text-slate-400 flex-shrink-0">
+                        <X size={14} />
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {showAutoSaveTip && !isBuilding && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.25 }}
+                      className="mx-5 mb-2 rounded-full pl-5 pr-4 py-3 flex items-center gap-3"
+                      style={{ background: '#1e293b' }}
+                    >
+                      <p className="text-[12px] text-white/90 leading-snug flex-1">
+                        Your app is auto saved & published. Share or add to phone screen through <Share size={10} className="inline-block text-white/60 -mt-0.5" /> anytime!
+                      </p>
+                      <button onClick={() => setShowAutoSaveTip(false)} className="text-white/50 flex-shrink-0">
+                        <X size={14} />
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               <div className="flex-shrink-0 px-4 pb-[env(safe-area-inset-bottom,16px)] pt-2 border-t border-foreground/5">
                 {/* Building step carousel — one at a time */}
                 <AnimatePresence mode="wait">
