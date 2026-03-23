@@ -383,6 +383,74 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
         )}
       </AnimatePresence>
 
+      {/* ===== SAMPLE APP PREVIEW OVERLAY ===== */}
+      <AnimatePresence>
+        {previewingApp && (
+          <motion.div
+            key="sample-preview"
+            className="fixed inset-0 z-[1100] bg-background flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            {/* Top banner */}
+            <AnimatePresence>
+              {showReadyBanner && (
+                <motion.div
+                  initial={{ y: -60, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -60, opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  className="absolute top-0 left-0 right-0 z-10 px-4 pt-[max(env(safe-area-inset-top,12px),12px)] pb-3"
+                  style={{ background: '#1e293b' }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-[13px] font-medium text-white">Your app is ready! 🎉</p>
+                      <p className="text-[11px] text-white/60">Back to check your app</p>
+                    </div>
+                    <motion.button
+                      onClick={handleBackFromPreview}
+                      className="px-3 py-1.5 rounded-full text-[12px] font-medium text-white"
+                      style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.1)' }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      返回 Chat
+                    </motion.button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Back button (always visible) */}
+            <div className="absolute top-[max(env(safe-area-inset-top,12px),12px)] left-4 z-20">
+              {!showReadyBanner && (
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  onClick={handleBackFromPreview}
+                  className="w-9 h-9 rounded-full bg-foreground/10 flex items-center justify-center"
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <ArrowLeft size={18} className="text-foreground" />
+                </motion.button>
+              )}
+            </div>
+
+            {/* Preview content */}
+            <div className="flex-1 flex flex-col items-center justify-center px-6">
+              <div className="text-6xl mb-4">{previewingApp.emoji}</div>
+              <h2 className="text-xl font-semibold text-foreground mb-1">{previewingApp.name}</h2>
+              <p className="text-sm text-muted-foreground mb-8">{previewingApp.desc}</p>
+              <div className="w-full max-w-sm rounded-2xl bg-muted/30 border border-border/50 aspect-[9/14] flex items-center justify-center">
+                <p className="text-sm text-muted-foreground">App Preview</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ===== DRAWER PANEL - portaled to body ===== */}
       {ReactDOM.createPortal(
         <AnimatePresence>
