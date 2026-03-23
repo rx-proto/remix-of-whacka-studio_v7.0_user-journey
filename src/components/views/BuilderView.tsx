@@ -195,7 +195,7 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
               )}
 
               {/* Waiting card - after thinking, before ready */}
-              {showWaiting && !isBuilding && (
+              {!isBuilding && (
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
