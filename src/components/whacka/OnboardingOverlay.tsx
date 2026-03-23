@@ -36,7 +36,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 1: Explore — dot 0
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           Browse apps made by others on the <span style={{ color: '#F97316', fontWeight: 600 }}>Explore</span> page.
         </p>
       ),
