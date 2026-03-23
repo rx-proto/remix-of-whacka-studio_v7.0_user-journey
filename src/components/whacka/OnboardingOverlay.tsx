@@ -207,7 +207,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
                       className="h-1 rounded-full transition-all duration-300"
                       style={{
                         width: i === current.dotIndex ? 18 : 6,
-                        backgroundColor: i === current.dotIndex ? '#F97316' : '#e2e8f0',
+                        backgroundColor: i === current.dotIndex ? '#F97316' : 'rgba(255,255,255,0.3)',
                       }}
                     />
                   ))}
