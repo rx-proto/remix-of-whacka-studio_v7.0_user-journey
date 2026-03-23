@@ -60,7 +60,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 3: Home — dot 2
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           View your <span style={{ color: '#F97316', fontWeight: 600 }}>created, remixed and bookmarked</span> apps in Home.
         </p>
       ),
