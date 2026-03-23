@@ -642,6 +642,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
                       ].map((app) => (
                         <button
                           key={app.name}
+                          onClick={() => handleSampleAppClick(app)}
                           className="w-full flex items-center gap-2.5 rounded-xl bg-slate-50 px-3 py-2 text-left active:bg-slate-100 transition-colors"
                         >
                           <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-white text-lg shadow-sm">
