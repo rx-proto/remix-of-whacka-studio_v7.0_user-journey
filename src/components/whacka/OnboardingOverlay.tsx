@@ -195,7 +195,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
 
               {/* Welcome step: tap hint instead of dots */}
               {step === 0 && (
-                <p className="text-[12px] text-slate-400 mt-4">Tap anywhere to continue</p>
+                <p className="text-[12px] text-white/50 mt-4">Tap anywhere to continue</p>
               )}
 
               {/* Dots for middle steps only */}
