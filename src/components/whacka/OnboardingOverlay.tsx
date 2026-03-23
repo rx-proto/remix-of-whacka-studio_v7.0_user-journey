@@ -189,8 +189,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="text-center max-w-[300px] bg-white rounded-2xl px-6 py-5"
-              style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.12)' }}
+              className="text-center max-w-[300px] px-6 py-5"
             >
               {current.content}
 
