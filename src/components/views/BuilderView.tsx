@@ -268,7 +268,39 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
               </motion.div>
             )}
           </AnimatePresence>
-          <div className="liquid-glass rounded-2xl p-3 space-y-2.5">
+          <div className="space-y-2.5">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="rounded-[28px] border border-border/60 bg-background/90 px-5 py-4 shadow-[0_8px_24px_hsl(var(--foreground)/0.08)]"
+            >
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                <Clock size={14} className="text-primary flex-shrink-0" />
+                <span>预计需要 <strong className="text-foreground">60s</strong> 生成</span>
+              </div>
+              <div className="space-y-2">
+                {sampleApps.map((app) => (
+                  <motion.button
+                    key={app.name}
+                    onClick={handleCardPreview}
+                    className="w-full flex items-center gap-3 rounded-2xl bg-muted/40 px-3 py-2.5 text-left"
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-background text-xl">
+                      {app.emoji}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-foreground">{app.name}</p>
+                      <p className="truncate text-xs text-muted-foreground">{app.desc}</p>
+                    </div>
+                    <ExternalLink size={14} className="flex-shrink-0 text-muted-foreground" />
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+
+            <div className="liquid-glass rounded-2xl p-3 space-y-2.5">
             <textarea
               placeholder="Ask for changes..."
               className="w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none resize-none text-sm leading-relaxed min-h-[60px]"
