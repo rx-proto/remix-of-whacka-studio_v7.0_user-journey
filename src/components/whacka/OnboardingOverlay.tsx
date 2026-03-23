@@ -26,7 +26,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 0: Welcome — no dots, show "tap anywhere" hint
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           Welcome to Whacka! You can create your own apps here and explore apps made by others.
         </p>
       ),
@@ -36,7 +36,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 1: Explore — dot 0
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           Browse apps made by others on the <span style={{ color: '#F97316', fontWeight: 600 }}>Explore</span> page.
         </p>
       ),
@@ -48,7 +48,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 2: Create — dot 1
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           Create your app here. You get <span style={{ color: '#F97316', fontWeight: 600 }}>15 free credits daily</span> — earn bonus credits by creating and inviting friends.
         </p>
       ),
@@ -60,7 +60,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 3: Home — dot 2
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           View your <span style={{ color: '#F97316', fontWeight: 600 }}>created, remixed and bookmarked</span> apps in Home.
         </p>
       ),
@@ -72,7 +72,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     // Step 4: Bulb — dot 3
     {
       content: (
-        <p className="text-[15px] leading-relaxed text-slate-800 font-medium">
+        <p className="text-[15px] leading-relaxed text-white font-medium">
           Whacka lets you add any app to your phone's home screen and use it <span style={{ color: '#F97316', fontWeight: 600 }}>like a native app</span>. You can always find the instructions here.
         </p>
       ),
@@ -85,7 +85,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
     {
       content: (
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[22px] font-bold text-slate-800">
+          <span className="text-[22px] font-bold text-white">
             Have fun in{' '}
             <span
               style={{
@@ -189,14 +189,13 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="text-center max-w-[300px] bg-white rounded-2xl px-6 py-5"
-              style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.12)' }}
+              className="text-center max-w-[300px] px-6 py-5"
             >
               {current.content}
 
               {/* Welcome step: tap hint instead of dots */}
               {step === 0 && (
-                <p className="text-[12px] text-slate-400 mt-4">Tap anywhere to continue</p>
+                <p className="text-[12px] text-white/50 mt-4">Tap anywhere to continue</p>
               )}
 
               {/* Dots for middle steps only */}
@@ -208,7 +207,7 @@ const OnboardingOverlay: React.FC<OnboardingOverlayProps> = ({ forceShow, onDone
                       className="h-1 rounded-full transition-all duration-300"
                       style={{
                         width: i === current.dotIndex ? 18 : 6,
-                        backgroundColor: i === current.dotIndex ? '#F97316' : '#e2e8f0',
+                        backgroundColor: i === current.dotIndex ? '#F97316' : 'rgba(255,255,255,0.3)',
                       }}
                     />
                   ))}
