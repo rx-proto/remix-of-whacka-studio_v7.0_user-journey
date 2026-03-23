@@ -398,27 +398,15 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
             <AnimatePresence>
               {showReadyBanner && (
                 <motion.div
-                  initial={{ y: -60, opacity: 0 }}
+                  initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -60, opacity: 0 }}
+                  exit={{ y: -20, opacity: 0 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  className="absolute top-0 left-0 right-0 z-10 px-4 pt-[max(env(safe-area-inset-top,12px),12px)] pb-3"
-                  style={{ background: '#1e293b' }}
+                  className="absolute top-4 left-4 right-4 z-10 rounded-2xl px-4 py-3"
+                  style={{ background: '#1e293b', boxShadow: '0 4px 24px rgba(0,0,0,0.3)' }}
                 >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[13px] font-medium text-white">Your app is ready! 🎉</p>
-                      <p className="text-[11px] text-white/60">Back to check your app</p>
-                    </div>
-                    <motion.button
-                      onClick={handleBackFromPreview}
-                      className="px-3 py-1.5 rounded-full text-[12px] font-medium text-white"
-                      style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.1)' }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      返回 Chat
-                    </motion.button>
-                  </div>
+                  <p className="text-[13px] font-medium text-white">Your app is ready! 🎉</p>
+                  <p className="text-[11px] text-white/60 mt-0.5">Back to check your app</p>
                 </motion.div>
               )}
             </AnimatePresence>
