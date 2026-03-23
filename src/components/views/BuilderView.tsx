@@ -158,7 +158,7 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
               </div>
 
               {/* AI Response - Building */}
-              {isBuilding && (
+              {(isBuilding || showWaiting || isReady) && (
                 <div className="flex justify-start">
                   <GlassCard className="p-4 max-w-[85%] space-y-3">
                     <div className="space-y-3">
