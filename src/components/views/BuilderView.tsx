@@ -45,7 +45,6 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
             setIsBuilding(false);
             setShowWaiting(true);
             setTimeout(() => {
-              setShowWaiting(false);
               setIsReady(true);
             }, 3000);
           }, 800);
@@ -159,13 +158,17 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
               </div>
 
               {/* AI Response - Building */}
-              {isBuilding && (
+              {(isBuilding || showWaiting || isReady) && (
                 <div className="flex justify-start">
                   <GlassCard className="p-4 max-w-[85%] space-y-3">
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Loader2 size={14} className="animate-spin text-primary" />
-                        <span>Building your app...</span>
+                        {isBuilding ? (
+                          <Loader2 size={14} className="animate-spin text-primary" />
+                        ) : (
+                          <Check size={14} className="text-emerald-400" />
+                        )}
+                        <span>{isBuilding ? 'Building your app...' : 'Build complete'}</span>
                       </div>
                       {thinkingSteps.map((step, i) => (
                         <motion.div
