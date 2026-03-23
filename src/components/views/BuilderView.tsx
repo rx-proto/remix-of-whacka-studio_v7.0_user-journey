@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Share2, Check, Loader2, ExternalLink, Copy, Send, Paperclip, Mic, Pencil, Share, X } from 'lucide-react';
+import { ArrowLeft, Check, Loader2, ExternalLink, Copy, Send, Paperclip, Mic, Pencil, Share, X, Clock } from 'lucide-react';
 import SegmentedControl from '../whacka/SegmentedControl';
 import GlassCard from '../whacka/GlassCard';
 import LiquidButton from '../whacka/LiquidButton';
@@ -19,12 +19,20 @@ const thinkingSteps = [
   'Almost ready! ✨',
 ];
 
+const sampleApps = [
+  { emoji: '💰', name: '记账小能手', desc: '智能记录每一笔开支' },
+  { emoji: '📊', name: '预算追踪器', desc: '可视化你的财务目标' },
+];
+
 const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
   const [mode, setMode] = useState(0);
   const [buildPhase, setBuildPhase] = useState(0);
   const [isBuilding, setIsBuilding] = useState(true);
+  const [showWaiting, setShowWaiting] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [showTip, setShowTip] = useState(true);
+  const [previewFromCard, setPreviewFromCard] = useState(false);
 
   useEffect(() => {
     if (!isBuilding) return;
@@ -33,12 +41,33 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
       timers.push(setTimeout(() => {
         setBuildPhase(i);
         if (i === thinkingSteps.length - 1) {
-          setTimeout(() => setIsBuilding(false), 800);
+          setTimeout(() => {
+            setIsBuilding(false);
+            setShowWaiting(true);
+            setTimeout(() => {
+              setShowWaiting(false);
+              setIsReady(true);
+            }, 3000);
+          }, 800);
         }
       }, (i + 1) * 1200));
     });
     return () => timers.forEach(clearTimeout);
   }, [isBuilding]);
+
+  const handleCardPreview = () => {
+    setPreviewFromCard(true);
+    setMode(1);
+  };
+
+  const handleBack = () => {
+    if (previewFromCard) {
+      setPreviewFromCard(false);
+      setMode(0);
+    } else {
+      onBack();
+    }
+  };
 
   return (
     <motion.div
@@ -51,7 +80,7 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
       {/* Header */}
       <div className="flex items-center justify-between px-4 pt-4 pb-2">
         <motion.button
-          onClick={onBack}
+          onClick={handleBack}
           className="liquid-button w-10 h-10 rounded-full flex items-center justify-center min-h-[44px] min-w-[44px] text-muted-foreground"
           whileTap={{ scale: 0.9 }}
         >
@@ -63,45 +92,30 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
 
       {/* Share Popover */}
       <GlassPopover isOpen={showShare} onClose={() => setShowShare(false)} className="min-w-[300px] left-4 right-4 top-16 p-5 space-y-5">
-        {/* App icon + edit */}
         <div className="flex flex-col items-center gap-2">
           <div className="relative">
-            <div className="w-20 h-20 rounded-2xl bg-muted/50 flex items-center justify-center text-4xl">
-              📱
-            </div>
+            <div className="w-20 h-20 rounded-2xl bg-muted/50 flex items-center justify-center text-4xl">📱</div>
             <button className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-muted flex items-center justify-center">
               <Pencil size={12} className="text-muted-foreground" />
             </button>
           </div>
         </div>
-
-        {/* App description */}
         <div className="glass-subtle rounded-xl px-3 py-2.5">
           <p className="text-sm text-muted-foreground">A budget tracking app with expense categories and savings goals.</p>
         </div>
-
-        {/* URL */}
         <div>
           <p className="text-sm font-medium text-foreground mb-1.5">url</p>
           <div className="glass-subtle rounded-xl px-3 py-2.5 flex items-center gap-2">
             <span className="text-xs text-muted-foreground flex-1 truncate">whacka.app/my-budget-app-x7k2</span>
-            <button className="text-primary p-1">
-              <Copy size={14} />
-            </button>
+            <button className="text-primary p-1"><Copy size={14} /></button>
           </div>
         </div>
-
-        {/* QR Code */}
         <div>
           <p className="text-sm text-muted-foreground mb-1.5">qrcode <span className="text-xs">（长按保存）</span></p>
           <div className="flex justify-center">
-            <div className="w-24 h-24 bg-muted/50 rounded-xl flex items-center justify-center">
-              <span className="text-3xl">📲</span>
-            </div>
+            <div className="w-24 h-24 bg-muted/50 rounded-xl flex items-center justify-center"><span className="text-3xl">📲</span></div>
           </div>
         </div>
-
-        {/* Buttons */}
         <div className="flex gap-2">
           <LiquidButton className="flex-1" size="sm">仅保存</LiquidButton>
           <LiquidButton variant="primary" className="flex-1" size="sm">保存并发布</LiquidButton>
@@ -129,7 +143,7 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
               exit={{ opacity: 0, x: -20 }}
               className="space-y-4 py-4"
             >
-              {/* User message — gray liquid glass */}
+              {/* User message */}
               <div className="flex justify-end">
                 <div className="rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] relative overflow-hidden"
                   style={{
@@ -144,10 +158,10 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                 </div>
               </div>
 
-              {/* AI Response */}
-              <div className="flex justify-start">
-                <GlassCard className="p-4 max-w-[85%] space-y-3">
-                  {isBuilding ? (
+              {/* AI Response - Building */}
+              {isBuilding && (
+                <div className="flex justify-start">
+                  <GlassCard className="p-4 max-w-[85%] space-y-3">
                     <div className="space-y-3">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Loader2 size={14} className="animate-spin text-primary" />
@@ -173,7 +187,59 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                         </motion.div>
                       ))}
                     </div>
-                  ) : (
+                  </GlassCard>
+                </div>
+              )}
+
+              {/* Waiting card - after thinking, before ready */}
+              {showWaiting && !isBuilding && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex justify-start"
+                >
+                  <GlassCard className="p-4 max-w-[85%] space-y-4">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Clock size={14} className="text-amber-500" />
+                      <span>预计需要 <strong className="text-foreground">60s</strong> 生成，先看看类似的应用？</span>
+                    </div>
+                    <div className="space-y-2">
+                      {sampleApps.map((app) => (
+                        <motion.button
+                          key={app.name}
+                          onClick={handleCardPreview}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors"
+                          style={{
+                            background: 'hsl(0 0% 50% / 0.08)',
+                            border: '1px solid hsl(0 0% 100% / 0.06)',
+                          }}
+                          whileTap={{ scale: 0.97 }}
+                        >
+                          <div className="w-10 h-10 rounded-xl bg-muted/60 flex items-center justify-center text-xl flex-shrink-0">
+                            {app.emoji}
+                          </div>
+                          <div className="text-left flex-1 min-w-0">
+                            <p className="text-sm font-medium text-foreground truncate">{app.name}</p>
+                            <p className="text-xs text-muted-foreground truncate">{app.desc}</p>
+                          </div>
+                          <ExternalLink size={14} className="text-muted-foreground flex-shrink-0" />
+                        </motion.button>
+                      ))}
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              )}
+
+              {/* Ready message */}
+              {isReady && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex justify-start"
+                >
+                  <GlassCard className="p-4 max-w-[85%] space-y-3">
                     <div className="space-y-3">
                       <p className="text-sm text-foreground">Your app is ready! 🎉</p>
                       <p className="text-sm text-muted-foreground">
@@ -190,9 +256,9 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                         </motion.button>
                       </div>
                     </div>
-                  )}
-                </GlassCard>
-              </div>
+                  </GlassCard>
+                </motion.div>
+              )}
             </motion.div>
           ) : (
             <motion.div
@@ -211,16 +277,14 @@ const BuilderView: React.FC<BuilderViewProps> = ({ prompt, onBack }) => {
                   </div>
                 </div>
               </GlassCard>
-
             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
 
       {/* Chat Input - iOS style */}
-      {mode === 0 && !isBuilding && (
+      {mode === 0 && !isBuilding && isReady && (
         <div className="fixed bottom-0 left-0 right-0 p-4 pb-safe space-y-2.5">
-          {/* Auto-save tip */}
           <AnimatePresence>
             {showTip && (
               <motion.div
