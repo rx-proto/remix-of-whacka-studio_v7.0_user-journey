@@ -109,6 +109,8 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
   const [showVoiceIndicator, setShowVoiceIndicator] = useState(false);
   const [voiceText, setVoiceText] = useState('');
   const [ideaIndex, setIdeaIndex] = useState(0);
+  const [previewingApp, setPreviewingApp] = useState<{ emoji: string; name: string; desc: string } | null>(null);
+  const [showReadyBanner, setShowReadyBanner] = useState(false);
   const [configToggles, setConfigToggles] = useState<Record<string, boolean>>({
     'Voice Mode': true,
     'Real-time Translation': false,
