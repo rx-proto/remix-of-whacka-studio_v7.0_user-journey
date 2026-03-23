@@ -241,7 +241,7 @@ const FloatingAssistant: React.FC<FloatingAssistantProps> = ({ isLight, appView,
     setPreviewingApp(app);
     setIsPanelOpen(false);
     setShowReadyBanner(true);
-    setTimeout(() => setShowReadyBanner(false), 4000);
+    setTimeout(() => setShowReadyBanner(false), 2000);
   };
 
   const handleBackFromPreview = () => {
